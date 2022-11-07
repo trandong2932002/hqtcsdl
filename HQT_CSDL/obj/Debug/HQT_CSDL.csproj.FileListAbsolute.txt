@@ -1,0 +1,11 @@
+C:\nam3ki1\HQTCSDL\hqtcsdl\HQT_CSDL\bin\Debug\HQT_CSDL.exe.config
+C:\nam3ki1\HQTCSDL\hqtcsdl\HQT_CSDL\bin\Debug\HQT_CSDL.exe
+C:\nam3ki1\HQTCSDL\hqtcsdl\HQT_CSDL\bin\Debug\HQT_CSDL.pdb
+C:\nam3ki1\HQTCSDL\hqtcsdl\HQT_CSDL\obj\Debug\HQT_CSDL.csproj.AssemblyReference.cache
+C:\nam3ki1\HQTCSDL\hqtcsdl\HQT_CSDL\obj\Debug\HQT_CSDL.csproj.SuggestedBindingRedirects.cache
+C:\nam3ki1\HQTCSDL\hqtcsdl\HQT_CSDL\obj\Debug\HQT_CSDL.View.MainForm.resources
+C:\nam3ki1\HQTCSDL\hqtcsdl\HQT_CSDL\obj\Debug\HQT_CSDL.Properties.Resources.resources
+C:\nam3ki1\HQTCSDL\hqtcsdl\HQT_CSDL\obj\Debug\HQT_CSDL.csproj.GenerateResource.cache
+C:\nam3ki1\HQTCSDL\hqtcsdl\HQT_CSDL\obj\Debug\HQT_CSDL.csproj.CoreCompileInputs.cache
+C:\nam3ki1\HQTCSDL\hqtcsdl\HQT_CSDL\obj\Debug\HQT_CSDL.exe
+C:\nam3ki1\HQTCSDL\hqtcsdl\HQT_CSDL\obj\Debug\HQT_CSDL.pdb
