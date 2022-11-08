@@ -159,6 +159,12 @@ go
 create proc sp_addChiNhanh @MaCN char(5), @DiaChi nvarchar(100),@SoDT char(10)
 as
 begin tran
+	if exists (select 1 from CHINHANH where MaCN = @MaCN)
+	begin
+		raiserror('Ma Chi nhanh da ton tai',16,1)
+		rollback
+		return
+	end
 	if(@DiaChi is null or @DiaChi = ' ')
 	begin
 		raiserror('Dia chi khong the bo trong',16,1)
@@ -178,9 +184,21 @@ go
 create proc sp_addPhongBan @MaPB char(5),@MaCN char(5),@TenPB nvarchar(50)
 as
 begin tran
+	if exists (select 1 from PHONGBAN where MaPB = @MaPB)
+	begin
+		raiserror('Ma Phong ban da ton tai',16,1)
+		rollback
+		return
+	end
 	if(@MaCN is null or @MaCN = ' ')
 	begin
 		raiserror('De nghi nhap ma chi nhanh',16,1)
+		rollback
+		return
+	end
+	if not exists (select 1 from CHINHANH where MaCN = @MaCN)
+	begin
+		raiserror('Chi nhanh khong ton tai',16,1)
 		rollback
 		return
 	end
@@ -204,6 +222,12 @@ go
 create proc sp_addCongViec @MaCV char(5),@TenCV nvarchar(50),@MoTaCV nvarchar(200)
 as
 begin tran
+	if exists (select 1 from CONGVIEC where MaCV = @MaCV)
+	begin
+		raiserror('Ma Cong viec da ton tai',16,1)
+		rollback
+		return
+	end
 	if(@TenCV is null or @TenCV = ' ')
 	begin
 		raiserror('Khong de trong Ten cong viec',16,1)
@@ -229,9 +253,21 @@ go
 create proc sp_addNhanVien @MaNV nvarchar(10),@MaPB nvarchar(5),@MaCV nvarchar(5),@TenNV nvarchar(50),@GioiTinh nvarchar(5),@SoDT char(10),@LoaiLaoDong nvarchar(20),@LuongDonVi int
 as
 begin tran
+	if exists (select 1 from NHANVIEN where MaNV = @MaNV)
+	begin
+		raiserror('Ma Nhan vien da ton tai',16,1)
+		rollback
+		return
+	end
 	if(@MaPB is null or @MaPB = ' ')
 	begin
 		raiserror('Hay chon phong ban',16,1)
+		rollback
+		return
+	end
+	if not exists (select 1 from PHONGBAN where MaPB = @MaPB)
+	begin
+		raiserror('Phong ban khong ton tai',16,1)
 		rollback
 		return
 	end
@@ -241,15 +277,21 @@ begin tran
 		rollback
 		return
 	end
+	if not exists (select 1 from CONGVIEC where MaCV=@MaCV)
+	begin
+		raiserror('Cong viec khong ton tai',16,1)
+		rollback
+		return
+	end
 	if(@TenNV is null or @TenNV = ' ')
 	begin
 		raiserror('Hay nhap ten',16,1)
 		rollback
 		return
 	end
-	if(@LuongDonVi is null)
+	if(@LuongDonVi is null or @LuongDonVi<0)
 	begin
-		raiserror('Hay nhap luong',16,1)
+		raiserror('Hay nhap luong dung',16,1)
 		rollback
 		return
 	end
@@ -266,6 +308,18 @@ go
 create proc sp_ChamCong @MaNV char(10), @ThoiGian int, @TangCa int
 as
 begin tran
+	if not exists (select 1 from NHANVIEN where MaNV = @MaNV)
+	begin
+		raiserror('Nhan vien khong ton tai',16,1)
+		rollback
+		return
+	end
+	if exists (select 1 from CHAMCONG where MaNV = @MaNV and NgayChamCong=GETDATE())
+	begin
+		raiserror('Da thuc hien cham cong truoc do',16,1)
+		rollback
+		return
+	end
 	if(@ThoiGian is null or @ThoiGian < 0 or @ThoiGian>16)
 	begin
 		raiserror('De nghi nhap thoi gian chinh xac',16,1)
@@ -286,6 +340,7 @@ begin tran
 		return
 	end
 commit tran
+
 
 
 ---Sua
@@ -466,6 +521,23 @@ NHANVIEN join
 on NHANVIEN.MaNV=T1.MaNV
 )
 
+
+--Nhap bang tinh luong
+go
+create proc sp_TinhLuong @NgayTinhluong date
+as
+begin tran
+	delete from TINHLUONG where ThoiGianThang = @NgayTinhluong
+	insert into TINHLUONG(MaNV,TongLuong,ThoiGianThang) select MaNV,TienLuong,@NgayTinhluong from f_TinhLuong(@NgayTinhluong)
+	if(@@ERROR<>0)
+	begin
+		raiserror('Error',16,1)
+		rollback
+		return
+	end
+commit tran
+
+
 --Tao User 
 --Admin:admin
 go
@@ -480,7 +552,7 @@ go
 create user Manager for login Manager
 
 /*
-select *from f_TinhLuong('2022-2-2')
-select *from f_ThongKe('2022-2-2')
+select *from f_TinhLuong('2020-2-2')
+select *from f_ThongKe('2020-2-2')
 sp(add,update,del)+transaction+Login+user
 */
