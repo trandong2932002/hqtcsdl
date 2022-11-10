@@ -541,17 +541,48 @@ commit tran
 --Tao User 
 --Admin:admin
 go
-create login Admin with password = 'admin'
+create login Admin with password = 'admin', default_database=[QUANLYLUONGNV], check_expiration=off,check_policy=off
 go
 create user Admin for login Admin
 
 --Manager:manager
 go
-create login Manager with password = 'manager'
+create login Manager with password = 'manager', default_database=[QUANLYLUONGNV], check_expiration=off,check_policy=off
 go
 create user Manager for login Manager
 
+
+go
+alter role db_owner add member Admin
+
+go
+create role employee_manage
+
+go
+grant select on CHINHANH to employee_manage 
+go
+grant select on PHONGBAN to employee_manage 
+go
+grant select on CONGVIEC to employee_manage 
+go
+grant select,update,insert,delete on NHANVIEN to employee_manage
+go
+grant select,update,insert,delete on CHAMCONG to employee_manage 
+go
+grant select,update,insert,delete on TINHLUONG to employee_manage 
+go
+grant execute on sp_ChamCong to employee_manage
+go
+grant execute on sp_TinhLuong to employee_manage
+go
+grant select on f_TinhLuong to employee_manage
+
+go
+alter role employee_manage add member Manager
+
+
 /*
+
 select *from f_TinhLuong('2020-2-2')
 select *from f_ThongKe('2020-2-2')
 sp(add,update,del)+transaction+Login+user
