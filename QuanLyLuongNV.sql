@@ -527,7 +527,7 @@ go
 create proc sp_TinhLuong @NgayTinhluong date
 as
 begin tran
-	delete from TINHLUONG where ThoiGianThang = @NgayTinhluong
+	delete from TINHLUONG where month(ThoiGianThang) = month(@NgayTinhluong) and year(ThoiGianThang)=year(@NgayTinhLuong)
 	insert into TINHLUONG(MaNV,TongLuong,ThoiGianThang) select MaNV,TienLuong,@NgayTinhluong from f_TinhLuong(@NgayTinhluong)
 	if(@@ERROR<>0)
 	begin
