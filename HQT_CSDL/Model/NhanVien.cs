@@ -13,6 +13,7 @@
             LoaiLaoDong = loaiLaoDong;
             TienTheoDonVi = tienTheoDonVi;
         }
+        public NhanVien() { }
 
         public string MaNV { get; set; }
         public string MaPB { get; set; }

@@ -1,5 +1,4 @@
-﻿using HQT_CSDL.Controller;
-using HQT_CSDL.View;
+﻿using HQT_CSDL.View;
 using System;
 using System.Windows.Forms;
 
