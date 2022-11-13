@@ -138,6 +138,9 @@ namespace HQT_CSDL.Controller
             // cell click -> edit emp
             DataGridViewEmployee.CellDoubleClick += new DataGridViewCellEventHandler((object sender, DataGridViewCellEventArgs e) =>
             {
+                if (e.RowIndex == -1)
+                    return;
+
                 // get emp
                 string empID = DataGridViewEmployee.Rows[e.RowIndex].Cells[0].Value.ToString();
 
@@ -398,12 +401,38 @@ namespace HQT_CSDL.Controller
                         // save new emp/edited emp
                         if (Status.Text == "BẠN ĐANG THÊM NHÂN VIÊN MỚI")
                         {
-                            MessageBox.Show("new");
+                            string message = EmployeeDB.AddEmployee(newEmployee);
+                            if (message is null)
+                            {
+                                MessageBox.Show("Thêm nhân viên " + newEmployee.MaNV + " thành công");
+
+                                // add new emp, re bind
+                                ListEmployee.Add(newEmployee);
+                                BindingSourceEmployee.DataSource = ListEmployee;
+                            }
+                            else
+                            {
+                                MessageBox.Show(message);
+                                return;
+                            }
                         }
                         else
                         {
-                            string empID = Status.Text.Substring(Status.Text.Length - 6);
-                            MessageBox.Show("edited " + empID);
+                            string message = EmployeeDB.UpdateEmployee(newEmployee);
+                            if (message is null)
+                            {
+                                MessageBox.Show("Sửa nhân viên " + newEmployee.MaNV + " thành công");
+
+                                // change emp data, re bind
+                                int index = ListEmployee.IndexOf(ListEmployee.Where(x => x.MaNV == newEmployee.MaNV).ToList()[0]);
+                                ListEmployee[index] = newEmployee;
+                                BindingSourceEmployee.DataSource = ListEmployee;
+                            }
+                            else
+                            {
+                                MessageBox.Show(message);
+                                return;
+                            }
                         }
 
                         // success -> clear form
@@ -418,8 +447,22 @@ namespace HQT_CSDL.Controller
                     {
                         if (Status.Text != "BẠN ĐANG THÊM NHÂN VIÊN MỚI")
                         {
-                            string empID = Status.Text.Substring(Status.Text.Length - 6);
-                            MessageBox.Show("deleted " + empID);
+                            string empID = TextBoxes.Where(x => x.Name == "textCreateMaNV").ToList()[0].Text;
+                            string message = EmployeeDB.DeleteEmployee(empID);
+                            if (message is null)
+                            {
+                                MessageBox.Show("Xoá nhân viên " + empID + " thành công");
+
+                                // delete emp, re bind
+                                int index = ListEmployee.IndexOf(ListEmployee.Where(x => x.MaNV == empID).ToList()[0]);
+                                ListEmployee.RemoveAt(index);
+                                BindingSourceEmployee.DataSource = ListEmployee;
+                            }
+                            else
+                            {
+                                MessageBox.Show(message);
+                                return;
+                            }
 
                             // success -> clear form
                             Buttons.Where(x => x.Name == "buttonCreateClear").ToList()[0].PerformClick();

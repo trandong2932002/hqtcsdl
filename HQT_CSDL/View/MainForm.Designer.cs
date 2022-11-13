@@ -42,6 +42,9 @@
             this.buttonFilterClear = new System.Windows.Forms.Button();
             this.buttonFilterFind = new System.Windows.Forms.Button();
             this.groupCreateandEdit = new System.Windows.Forms.GroupBox();
+            this.textCreateMaNV = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.buttonDelete = new System.Windows.Forms.Button();
             this.labelStatus = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.buttonCreateClear = new System.Windows.Forms.Button();
@@ -62,7 +65,6 @@
             this.dataNhanVien = new System.Windows.Forms.DataGridView();
             this.tabChamCong = new System.Windows.Forms.TabPage();
             this.tabTinhLuong = new System.Windows.Forms.TabPage();
-            this.buttonDelete = new System.Windows.Forms.Button();
             this.tabControl.SuspendLayout();
             this.tabNhanVien.SuspendLayout();
             this.groupFilter.SuspendLayout();
@@ -193,6 +195,8 @@
             // 
             // groupCreateandEdit
             // 
+            this.groupCreateandEdit.Controls.Add(this.textCreateMaNV);
+            this.groupCreateandEdit.Controls.Add(this.label8);
             this.groupCreateandEdit.Controls.Add(this.buttonDelete);
             this.groupCreateandEdit.Controls.Add(this.labelStatus);
             this.groupCreateandEdit.Controls.Add(this.label1);
@@ -213,10 +217,36 @@
             this.groupCreateandEdit.Controls.Add(this.label2);
             this.groupCreateandEdit.Location = new System.Drawing.Point(906, 6);
             this.groupCreateandEdit.Name = "groupCreateandEdit";
-            this.groupCreateandEdit.Size = new System.Drawing.Size(317, 472);
+            this.groupCreateandEdit.Size = new System.Drawing.Size(317, 527);
             this.groupCreateandEdit.TabIndex = 35;
             this.groupCreateandEdit.TabStop = false;
             this.groupCreateandEdit.Text = "Thêm/Sửa nhân viên";
+            // 
+            // textCreateMaNV
+            // 
+            this.textCreateMaNV.Location = new System.Drawing.Point(140, 62);
+            this.textCreateMaNV.Name = "textCreateMaNV";
+            this.textCreateMaNV.Size = new System.Drawing.Size(140, 20);
+            this.textCreateMaNV.TabIndex = 38;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(40, 66);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(74, 13);
+            this.label8.TabIndex = 37;
+            this.label8.Text = "Mã Nhân viên";
+            // 
+            // buttonDelete
+            // 
+            this.buttonDelete.Enabled = false;
+            this.buttonDelete.Location = new System.Drawing.Point(48, 443);
+            this.buttonDelete.Name = "buttonDelete";
+            this.buttonDelete.Size = new System.Drawing.Size(74, 23);
+            this.buttonDelete.TabIndex = 36;
+            this.buttonDelete.Text = "Xoá";
+            this.buttonDelete.UseVisualStyleBackColor = true;
             // 
             // labelStatus
             // 
@@ -231,7 +261,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(40, 66);
+            this.label1.Location = new System.Drawing.Point(40, 114);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(77, 13);
             this.label1.TabIndex = 26;
@@ -239,7 +269,7 @@
             // 
             // buttonCreateClear
             // 
-            this.buttonCreateClear.Location = new System.Drawing.Point(145, 395);
+            this.buttonCreateClear.Location = new System.Drawing.Point(145, 443);
             this.buttonCreateClear.Name = "buttonCreateClear";
             this.buttonCreateClear.Size = new System.Drawing.Size(60, 23);
             this.buttonCreateClear.TabIndex = 34;
@@ -248,14 +278,14 @@
             // 
             // textCreateTenNV
             // 
-            this.textCreateTenNV.Location = new System.Drawing.Point(140, 158);
+            this.textCreateTenNV.Location = new System.Drawing.Point(140, 206);
             this.textCreateTenNV.Name = "textCreateTenNV";
             this.textCreateTenNV.Size = new System.Drawing.Size(140, 20);
             this.textCreateTenNV.TabIndex = 17;
             // 
             // buttonCreateEdit
             // 
-            this.buttonCreateEdit.Location = new System.Drawing.Point(215, 395);
+            this.buttonCreateEdit.Location = new System.Drawing.Point(215, 443);
             this.buttonCreateEdit.Name = "buttonCreateEdit";
             this.buttonCreateEdit.Size = new System.Drawing.Size(60, 23);
             this.buttonCreateEdit.TabIndex = 33;
@@ -264,7 +294,7 @@
             // 
             // textCreateSoDT
             // 
-            this.textCreateSoDT.Location = new System.Drawing.Point(140, 254);
+            this.textCreateSoDT.Location = new System.Drawing.Point(140, 302);
             this.textCreateSoDT.Name = "textCreateSoDT";
             this.textCreateSoDT.Size = new System.Drawing.Size(140, 20);
             this.textCreateSoDT.TabIndex = 19;
@@ -272,7 +302,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(40, 354);
+            this.label7.Location = new System.Drawing.Point(40, 402);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(85, 13);
             this.label7.TabIndex = 32;
@@ -280,7 +310,7 @@
             // 
             // textCreateTienTheoDonVi
             // 
-            this.textCreateTienTheoDonVi.Location = new System.Drawing.Point(140, 350);
+            this.textCreateTienTheoDonVi.Location = new System.Drawing.Point(140, 398);
             this.textCreateTienTheoDonVi.Name = "textCreateTienTheoDonVi";
             this.textCreateTienTheoDonVi.Size = new System.Drawing.Size(140, 20);
             this.textCreateTienTheoDonVi.TabIndex = 21;
@@ -288,7 +318,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(40, 306);
+            this.label6.Location = new System.Drawing.Point(40, 354);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(72, 13);
             this.label6.TabIndex = 31;
@@ -297,7 +327,7 @@
             // comboCreateMaPB
             // 
             this.comboCreateMaPB.FormattingEnabled = true;
-            this.comboCreateMaPB.Location = new System.Drawing.Point(140, 62);
+            this.comboCreateMaPB.Location = new System.Drawing.Point(140, 110);
             this.comboCreateMaPB.Name = "comboCreateMaPB";
             this.comboCreateMaPB.Size = new System.Drawing.Size(140, 21);
             this.comboCreateMaPB.TabIndex = 22;
@@ -305,7 +335,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(40, 258);
+            this.label5.Location = new System.Drawing.Point(40, 306);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(70, 13);
             this.label5.TabIndex = 30;
@@ -314,7 +344,7 @@
             // comboCreateMaCV
             // 
             this.comboCreateMaCV.FormattingEnabled = true;
-            this.comboCreateMaCV.Location = new System.Drawing.Point(140, 110);
+            this.comboCreateMaCV.Location = new System.Drawing.Point(140, 158);
             this.comboCreateMaCV.Name = "comboCreateMaCV";
             this.comboCreateMaCV.Size = new System.Drawing.Size(140, 21);
             this.comboCreateMaCV.TabIndex = 23;
@@ -322,7 +352,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(40, 210);
+            this.label4.Location = new System.Drawing.Point(40, 258);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(47, 13);
             this.label4.TabIndex = 29;
@@ -331,7 +361,7 @@
             // comboCreateGioiTinh
             // 
             this.comboCreateGioiTinh.FormattingEnabled = true;
-            this.comboCreateGioiTinh.Location = new System.Drawing.Point(140, 206);
+            this.comboCreateGioiTinh.Location = new System.Drawing.Point(140, 254);
             this.comboCreateGioiTinh.Name = "comboCreateGioiTinh";
             this.comboCreateGioiTinh.Size = new System.Drawing.Size(140, 21);
             this.comboCreateGioiTinh.TabIndex = 24;
@@ -339,7 +369,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(40, 162);
+            this.label3.Location = new System.Drawing.Point(40, 210);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(58, 13);
             this.label3.TabIndex = 28;
@@ -348,7 +378,7 @@
             // comboCreateLoaiLaoDong
             // 
             this.comboCreateLoaiLaoDong.FormattingEnabled = true;
-            this.comboCreateLoaiLaoDong.Location = new System.Drawing.Point(140, 302);
+            this.comboCreateLoaiLaoDong.Location = new System.Drawing.Point(140, 350);
             this.comboCreateLoaiLaoDong.Name = "comboCreateLoaiLaoDong";
             this.comboCreateLoaiLaoDong.Size = new System.Drawing.Size(140, 21);
             this.comboCreateLoaiLaoDong.TabIndex = 25;
@@ -356,7 +386,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(40, 114);
+            this.label2.Location = new System.Drawing.Point(40, 162);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(73, 13);
             this.label2.TabIndex = 27;
@@ -389,16 +419,6 @@
             this.tabTinhLuong.TabIndex = 2;
             this.tabTinhLuong.Text = "Bảng Lương";
             this.tabTinhLuong.UseVisualStyleBackColor = true;
-            // 
-            // buttonDelete
-            // 
-            this.buttonDelete.Enabled = false;
-            this.buttonDelete.Location = new System.Drawing.Point(48, 395);
-            this.buttonDelete.Name = "buttonDelete";
-            this.buttonDelete.Size = new System.Drawing.Size(74, 23);
-            this.buttonDelete.TabIndex = 36;
-            this.buttonDelete.Text = "Xoá";
-            this.buttonDelete.UseVisualStyleBackColor = true;
             // 
             // MainForm
             // 
@@ -458,6 +478,8 @@
         private System.Windows.Forms.GroupBox groupFilter;
         private System.Windows.Forms.Label labelStatus;
         private System.Windows.Forms.Button buttonDelete;
+        private System.Windows.Forms.TextBox textCreateMaNV;
+        private System.Windows.Forms.Label label8;
     }
 }
 

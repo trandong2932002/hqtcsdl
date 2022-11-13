@@ -1,4 +1,6 @@
-﻿using System.Data;
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 
 namespace HQT_CSDL.Data
@@ -9,13 +11,44 @@ namespace HQT_CSDL.Data
 
         public static DataTable LoadTable(string query)
         {
-            conn.Open();
-            SqlCommand command = new SqlCommand(query, conn);
-            SqlDataAdapter adapter = new SqlDataAdapter(command);
-            DataTable dataTable = new DataTable();
-            adapter.Fill(dataTable);
-            conn.Close();
-            return dataTable;
+            try
+            {
+                conn.Open();
+                SqlCommand command = new SqlCommand(query, conn);
+                SqlDataAdapter adapter = new SqlDataAdapter(command);
+                DataTable dataTable = new DataTable();
+                adapter.Fill(dataTable);
+                conn.Close();
+                return dataTable;
+            }
+            catch (Exception e)
+            {
+                conn.Close();
+                Console.WriteLine(e.Message);
+                return null;
+            }
+        }
+
+        public static string ExecStoredProduce(string query, List<SqlParameter> parameters)
+        {
+            try
+            {
+                conn.Open();
+                SqlCommand command = new SqlCommand(query, conn);
+                command.CommandType = CommandType.StoredProcedure;
+                foreach (SqlParameter parameter in parameters)
+                {
+                    command.Parameters.Add(parameter);
+                }
+                command.ExecuteNonQuery();
+                conn.Close();
+                return null;
+            }
+            catch (SqlException e)
+            {
+                conn.Close();
+                return e.Message;
+            }
         }
     }
 }
