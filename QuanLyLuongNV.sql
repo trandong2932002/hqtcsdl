@@ -25,7 +25,7 @@ create table CONGVIEC(
 )
 
 create table NHANVIEN(--Khoi tao cac bang lien quan bang trigger
-	MaNV char(10) primary key,
+	MaNV char(6) primary key,
 	MaPB char(5) references PHONGBAN(MaPB) on delete set null on update cascade,
 	MaCV char(5) references CONGVIEC(MaCV) on delete set null on update cascade,
 	TenNV nvarchar(50),
@@ -38,7 +38,7 @@ create table NHANVIEN(--Khoi tao cac bang lien quan bang trigger
 
 go
 create table CHAMCONG(
-	MaNV char(10) references NHANVIEN(MaNV)on update cascade,
+	MaNV char(6) references NHANVIEN(MaNV)on update cascade,
 	ThoiGianLamDonVi int,
 	TangCa int, 
 	NgayChamCong date,
@@ -48,7 +48,7 @@ create table CHAMCONG(
 
 go
 create table TINHLUONG(
-	MaNV char(10) references NHANVIEN(MaNV)on update cascade,
+	MaNV char(6) references NHANVIEN(MaNV)on update cascade,
 	TongLuong int,
 	ThoiGianThang date,
 	primary key(MaNV,ThoiGianThang)
@@ -159,6 +159,12 @@ go
 create proc sp_addChiNhanh @MaCN char(5), @DiaChi nvarchar(100),@SoDT char(10)
 as
 begin tran
+	if(@MaCN is null or @MaCN = ' ')
+	begin
+		raiserror('Chua nhap ma chi nhanh',16,1)
+		rollback
+		return
+	end
 	if exists (select 1 from CHINHANH where MaCN = @MaCN)
 	begin
 		raiserror('Ma Chi nhanh da ton tai',16,1)
@@ -184,6 +190,12 @@ go
 create proc sp_addPhongBan @MaPB char(5),@MaCN char(5),@TenPB nvarchar(50)
 as
 begin tran
+	if(@MaPB is null or @MaPB = ' ')
+	begin
+		raiserror('Chua nhap ma phong ban',16,1)
+		rollback
+		return
+	end
 	if exists (select 1 from PHONGBAN where MaPB = @MaPB)
 	begin
 		raiserror('Ma Phong ban da ton tai',16,1)
@@ -222,6 +234,12 @@ go
 create proc sp_addCongViec @MaCV char(5),@TenCV nvarchar(50),@MoTaCV nvarchar(200)
 as
 begin tran
+	if(@MaCV is null or @MaCV = ' ')
+	begin
+		raiserror('Chua nhap ma cong viec',16,1)
+		rollback
+		return
+	end
 	if exists (select 1 from CONGVIEC where MaCV = @MaCV)
 	begin
 		raiserror('Ma Cong viec da ton tai',16,1)
@@ -250,12 +268,18 @@ begin tran
 commit tran
 
 go
-create proc sp_addNhanVien @MaNV nvarchar(10),@MaPB nvarchar(5),@MaCV nvarchar(5),@TenNV nvarchar(50),@GioiTinh nvarchar(5),@SoDT char(10),@LoaiLaoDong nvarchar(20),@LuongDonVi int
+create proc sp_addNhanVien @MaNV nvarchar(6),@MaPB nvarchar(5),@MaCV nvarchar(5),@TenNV nvarchar(50),@GioiTinh nvarchar(5),@SoDT char(10),@LoaiLaoDong nvarchar(20),@LuongDonVi int
 as
 begin tran
 	if exists (select 1 from NHANVIEN where MaNV = @MaNV)
 	begin
 		raiserror('Ma Nhan vien da ton tai',16,1)
+		rollback
+		return
+	end
+	if(@MaNV is null or @MaNV=' ')
+	begin
+		raiserror('Chua nhap ma nhan vien',16,1)
 		rollback
 		return
 	end
@@ -295,6 +319,24 @@ begin tran
 		rollback
 		return
 	end
+	if(@GioiTinh!=N'Nam' or @GioiTinh!=N'Nữ')
+	begin
+		raiserror('Hay nhap dung gioi tinh',16,1)
+		rollback
+		return
+	end
+	if(@LoaiLaoDong is null or @LoaiLaoDong='')
+	begin
+		raiserror('Chon loai lao dong',16,1)
+		rollback
+		return
+	end
+	if(@SoDT is null or @SoDT = ' ' or len(@SoDT)!=10)
+	begin
+		raiserror('Hay nhap so dien thoai dung',16,1)
+		rollback
+		return
+	end
 	INSERT into NHANVIEN values(@MaNV,@MaPB,@MaCV,@TenNV,@GioiTinh,@SoDT,@LoaiLaoDong,@LuongDonVi)
 	if(@@ERROR<>0)
 	begin
@@ -305,7 +347,7 @@ begin tran
 commit tran
 
 go
-create proc sp_ChamCong @MaNV char(10), @ThoiGian int, @TangCa int
+create proc sp_ChamCong @MaNV char(6), @ThoiGian int, @TangCa int
 as
 begin tran
 	if not exists (select 1 from NHANVIEN where MaNV = @MaNV)
@@ -320,13 +362,13 @@ begin tran
 		rollback
 		return
 	end
-	if(@ThoiGian is null or @ThoiGian < 0 or @ThoiGian>16)
+	if(@ThoiGian is null or @ThoiGian < 0 or @ThoiGian>16 or @ThoiGian = ' ')
 	begin
 		raiserror('De nghi nhap thoi gian chinh xac',16,1)
 		rollback
 		return
 	end
-	if(@TangCa is null or @TangCa<0 or @TangCa>8)
+	if(@TangCa is null or @TangCa<0 or @TangCa>8 or @TangCa = ' ')
 	begin
 		raiserror('De nghi nhap thoi gian tang ca chinh xac',16,1)
 		rollback
@@ -348,9 +390,21 @@ go
 create proc sp_updateChiNhanh @MaCN char(5), @DiaChi nvarchar(50),@SoDT char(10)
 as
 begin tran
+	if(@MaCN is null or @MaCN = ' ')
+	begin 
+		raiserror('Hay chon chi nhanh',16,1)
+		rollback
+		return
+	end
 	if(@DiaChi is null or @DiaChi = ' ')
 	begin
 		raiserror('Dia chi khong the bo trong',16,1)
+		rollback
+		return
+	end
+	if(@SoDT is null or @SoDT = ' ' or len(@SoDT)!=10)
+	begin
+		raiserror('Hay nhap so dien thoai dung',16,1)
 		rollback
 		return
 	end
@@ -367,6 +421,12 @@ go
 create proc sp_updatePhongBan @MaPB char(5),@MaCN char(5),@TenPB nvarchar(20)
 as
 begin tran
+	if(@MaPB is null or @MaPB = ' ')
+	begin
+		raiserror('Hay chon phong ban',16,1)
+		rollback
+		return
+	end
 	if(@MaCN is null or @MaCN = ' ')
 	begin
 		raiserror('De nghi nhap ma chi nhanh',16,1)
@@ -392,6 +452,12 @@ go
 create proc sp_updateCongViec @MaCV char(5),@TenCV nvarchar(20),@MoTaCV nvarchar(50)
 as
 begin tran
+	if(@MaCV is null or @MaCV = ' ')
+	begin
+		raiserror('Hay chon cong viec',16,1)
+		rollback
+		return
+	end
 	if(@TenCV is null or @TenCV = ' ')
 	begin
 		raiserror('Khong de trong Ten cong viec',16,1)
@@ -414,9 +480,15 @@ begin tran
 commit tran
 
 go
-create proc sp_updateNhanVien @MaNV nvarchar(10),@MaPB nvarchar(5),@MaCV nvarchar(5),@TenNV nvarchar(50),@GioiTinh nvarchar(5),@SoDT char(10),@LoaiLaoDong nvarchar(20),@LuongDonVi int
+create proc sp_updateNhanVien @MaNV nvarchar(6),@MaPB nvarchar(5),@MaCV nvarchar(5),@TenNV nvarchar(50),@GioiTinh nvarchar(5),@SoDT char(10),@LoaiLaoDong nvarchar(20),@LuongDonVi int
 as
 begin tran
+	if(@MaNV is null or @MaNV = ' ')
+	begin
+		raiserror('Hay nhap ma nhan vien',16,1)
+		rollback
+		return
+	end
 	if(@MaPB is null or @MaPB = ' ')
 	begin
 		raiserror('Hay chon phong ban',16,1)
@@ -435,9 +507,27 @@ begin tran
 		rollback
 		return
 	end
-	if(@LuongDonVi is null)
+	if(@GioiTinh!=N'Nam' or @GioiTinh!=N'Nữ')
 	begin
-		raiserror('Hay nhap luong',16,1)
+		raiserror('Hay nhap dung gioi tinh',16,1)
+		rollback
+		return
+	end
+	if(@LoaiLaoDong is null or @LoaiLaoDong='')
+	begin
+		raiserror('Chon loai lao dong',16,1)
+		rollback
+		return
+	end
+	if(@SoDT is null or @SoDT = ' ' or len(@SoDT)!=10)
+	begin
+		raiserror('Hay nhap so dien thoai dung',16,1)
+		rollback
+		return
+	end
+	if(@LuongDonVi is null or @LuongDonVi<0 or @LuongDonVi%1000 !=0)
+	begin
+		raiserror('Hay nhap luong chinh xac',16,1)
 		rollback
 		return
 	end
@@ -536,7 +626,7 @@ begin tran
 		return
 	end
 commit tran
-
+ 
 
 --Tao User 
 --Admin:admin
@@ -586,4 +676,33 @@ alter role employee_manage add member Manager
 select *from f_TinhLuong('2020-2-2')
 select *from f_ThongKe('2020-2-2')
 sp(add,update,del)+transaction+Login+user
+*/
+/*
+Thêm: 
+exec sp_addChiNhanh @MaCN, @DiaChinh, @SoDT
+exec sp_addPhongBan @MaPB, @MaPB, @TenPB
+sp_addCongViec @MaCV, @TenCV, @MoTaCV
+sp_addNhanVien @MaNV, @MaPB, @MaCV, @TenNV, @GioiTinh, @SoDT, @LoaiLaoDong, @LuongDonVi
+
+Sửa:
+sp_updateChiNhanh @MaCN, @DiaChi, @SoDT
+sp_updatePhongBan @MaPB, @MaPB, @TenPB
+sp_updateCongViec @MaCV, @TenCV, @MoTaCV
+sp_updateNhanVien @MaNV, @MaPB, @MaCV, @TenNV, @GioiTinh, @SoDT, @LoaiLaoDong, @LuongDonVi
+
+Xóa:
+sp_delChiNhanh @MaCN
+sp_delPhongBan @MaPB
+sp_delCongViec @MACV
+sp_delNhanVien @MaNV
+
+Chức năng:
+sp_ChamCong @date
+sp_TinhLuong @date
+
+Bảng:
+f_TinhLuong @date
+f_ThongKe @date
+
+connetionString = @"Data Source=.;Initial Catalog=QUANLYLUONGNV;User ID=username;Password=pass";
 */
