@@ -545,6 +545,18 @@ go
 create proc sp_delChiNhanh @MaCN char(5)
 as
 begin tran
+	if(@MaCN is null or @MaCN = ' ')
+	begin
+		raiserror('Hay chon chi nhanh',16,1)
+		rollback
+		return
+	end
+	if not exists (select 1 from CHINHANH where MaCN=@MaCN)
+	begin
+		raiserror('Chi nhanh khong ton tai',16,1)
+		rollback
+		return
+	end
 	DELETE from CHINHANH where MaCN = @MaCN 
 	if(@@ERROR<>0)
 	begin
@@ -558,6 +570,18 @@ go
 create proc sp_delPhongBan @MaPB char(5)
 as
 begin tran
+	if(@MaPB is null or @MaPB = ' ')
+	begin
+		raiserror('Hay chon phong ban',16,1)
+		rollback
+		return
+	end
+	if not exists (select 1 from PHONGBAN where MaPB=@MaPB)
+	begin
+		raiserror('Phong ban khong ton tai',16,1)
+		rollback
+		return
+	end
 	DELETE from PHONGBAN where MaPB = @MaPB
 	if(@@ERROR<>0)
 	begin
@@ -571,6 +595,18 @@ go
 create proc sp_delCongViec @MaCV char(5)
 as
 begin tran
+	if(@MaCV is null or @MaCV = ' ')
+	begin
+		raiserror('Hay chon cong viec',16,1)
+		rollback
+		return
+	end
+	if not exists (select 1 from CONGVIEC where MaCV=@MaCV)
+	begin
+		raiserror('Cong viec khong ton tai',16,1)
+		rollback
+		return
+	end
 	DELETE from CONGVIEC where MaCV = @MaCV
 	if(@@ERROR<>0)
 	begin
@@ -584,6 +620,18 @@ go
 create proc sp_delNhanVien @MaNV char(6)
 as 
 begin tran
+	if(@MaNV is null or @MaNV = ' ')
+	begin
+		raiserror('Hay chon nhan vien',16,1)
+		rollback
+		return
+	end
+	if not exists (select 1 from NHANVIEN where MaNV=@MaNV)
+	begin
+		raiserror('Nhan vien khong ton tai',16,1)
+		rollback
+		return
+	end
 	DELETE from NHANVIEN where MaNV=@MaNV
 	if(@@ERROR<>0)
 	begin
@@ -706,3 +754,4 @@ f_ThongKe @date
 
 connetionString = @"Data Source=.;Initial Catalog=QUANLYLUONGNV;User ID=username;Password=pass";
 */
+
