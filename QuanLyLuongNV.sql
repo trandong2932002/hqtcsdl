@@ -319,7 +319,7 @@ begin tran
 		rollback
 		return
 	end
-	if(@GioiTinh!=N'Nam' or @GioiTinh!=N'Nữ')
+	if(@GioiTinh!=N'Nam' and @GioiTinh!=N'Nữ')
 	begin
 		raiserror('Hay nhap dung gioi tinh',16,1)
 		rollback
@@ -507,7 +507,7 @@ begin tran
 		rollback
 		return
 	end
-	if(@GioiTinh!=N'Nam' or @GioiTinh!=N'Nữ')
+	if(@GioiTinh!=N'Nam' and @GioiTinh!=N'Nữ')
 	begin
 		raiserror('Hay nhap dung gioi tinh',16,1)
 		rollback
