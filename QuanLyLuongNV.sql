@@ -581,7 +581,7 @@ begin tran
 commit tran
 
 go
-create proc sp_delNhanVien @MaNV char(5)
+create proc sp_delNhanVien @MaNV char(6)
 as 
 begin tran
 	DELETE from NHANVIEN where MaNV=@MaNV
