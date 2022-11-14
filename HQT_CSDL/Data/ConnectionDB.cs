@@ -7,7 +7,8 @@ namespace HQT_CSDL.Data
 {
     public static class ConnectionDB
     {
-        private static SqlConnection conn = new SqlConnection("Data Source=DESKTOP-RF7863D;Initial Catalog=QUANLYLUONGNV;Integrated Security=True");
+        //private static SqlConnection conn = new SqlConnection("Data Source=DESKTOP-RF7863D;Initial Catalog=QUANLYLUONGNV;Integrated Security=True");
+        private static SqlConnection conn = new SqlConnection("Data Source=.;Initial Catalog=QUANLYLUONGNV;Integrated Security=True");
 
         public static DataTable LoadTable(string query)
         {

@@ -10,6 +10,7 @@ namespace HQT_CSDL.View
         {
             InitializeComponent();
             EmployeeManagement.TabEmployee = tabNhanVien;
+            //TimeChecking
         }
     }
 }
