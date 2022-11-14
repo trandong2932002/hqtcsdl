@@ -356,19 +356,19 @@ begin tran
 		rollback
 		return
 	end
-	if exists (select 1 from CHAMCONG where MaNV = @MaNV and NgayChamCong=GETDATE())
+	if exists (select 1 from CHAMCONG where MaNV = @MaNV and NgayChamCong=convert(date,GETDATE()))
 	begin
 		raiserror('Da thuc hien cham cong truoc do',16,1)
 		rollback
 		return
 	end
-	if(@ThoiGian is null or @ThoiGian < 0 or @ThoiGian>16 or @ThoiGian = ' ')
+	if(@ThoiGian is null or @ThoiGian < 0 or @ThoiGian>16)
 	begin
 		raiserror('De nghi nhap thoi gian chinh xac',16,1)
 		rollback
 		return
 	end
-	if(@TangCa is null or @TangCa<0 or @TangCa>8 or @TangCa = ' ')
+	if(@TangCa is null or @TangCa<=-1 or @TangCa>8)
 	begin
 		raiserror('De nghi nhap thoi gian tang ca chinh xac',16,1)
 		rollback
@@ -755,3 +755,4 @@ f_ThongKe @date
 connetionString = @"Data Source=.;Initial Catalog=QUANLYLUONGNV;User ID=username;Password=pass";
 */
 
+drop proc sp_ChamCong
