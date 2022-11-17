@@ -2,14 +2,20 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-
+using HQT_CSDL.View;
 namespace HQT_CSDL.Data
 {
-    public static class ConnectionDB
+    public class ConnectionDB
     {
-        //private static SqlConnection conn = new SqlConnection("Data Source=DESKTOP-RF7863D;Initial Catalog=QUANLYLUONGNV;Integrated Security=True");
-        private static SqlConnection conn = new SqlConnection("Data Source=.;Initial Catalog=QUANLYLUONGNV;Integrated Security=True");
 
+        //private static SqlConnection conn = new SqlConnection("Data Source=DESKTOP-RF7863D;Initial Catalog=QUANLYLUONGNV;Integrated Security=True");
+        //public static string ConnString;
+        //private static SqlConnection conn = new SqlConnection(ConnString);
+        //private static SqlConnection conn = new SqlConnection("Data Source=.;Initial Catalog=QUANLYLUONGNV;Integrated Security=True");
+        private static SqlConnection conn = new SqlConnection("Data Source=.;Initial Catalog=QUANLYLUONGNV;User ID=" + login.name + ";Password=" + login.password + ";");
+
+        
+        
         public static DataTable LoadTable(string query)
         {
             try

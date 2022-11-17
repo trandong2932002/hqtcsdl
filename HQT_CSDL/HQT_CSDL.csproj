@@ -59,6 +59,12 @@
     <Compile Include="Model\PhongBan.cs" />
     <Compile Include="Model\TinhLuong.cs" />
     <Compile Include="Util\SortableBindingList.cs" />
+    <Compile Include="View\login.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\login.Designer.cs">
+      <DependentUpon>login.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -67,6 +73,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="View\login.resx">
+      <DependentUpon>login.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
