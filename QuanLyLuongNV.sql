@@ -54,93 +54,7 @@ create table TINHLUONG(
 	primary key(MaNV,ThoiGianThang)
 )
 
--------TRIGGER-------
---Nhap Nhan Vien--
-/*
-go
-create trigger trgg_new_NHANVIEN
-on NHANVIEN after insert
-as
-begin
-	insert into CHAMCONG(MaNV,ThoiGianLamDonVi,TangCa,TongLuong)values((select MaNV from inserted),0,0,0)
-	insert into PHUCAP(MaNV,SoTien,LyDo)values((select MaNV from inserted),0,N'Nhan vien moi')
-	insert into TINHLUONG(MaNV,TongLuong,TongPhuCap,ThucNhan)values((select MaNV from inserted),0,0,0)
-end
-*/
---Thay Doi Cham Cong--
-/*
-go 
-create trigger trgg_chg_CHAMCONG
-on CHAMCONG after update
-as
-declare @donvi int,
-		@loai nvarchar(20),
-		@manv char(10)
-select @donvi = ThoiGianLamDonVi from inserted
-select @loai = LoaiLaoDong from LOAILUONG where MaNV=(@manv)
-if (@donvi>30 and @loai=N'ToanThoiGian')
-begin
-	update CHAMCONG set ThoiGianLamDonVi = 30 where MaNV = (@manv)
-end
 
-if(@donvi>12 and @loai=N'BanThoiGian')
-begin
-	update CHAMCONG set ThoiGianLamDonVi = 12 where MaNV = (@manv)
-end
-begin
-	update CHAMCONG set TongLuong = ThoiGianLamDonVi*(select TienMoiDonVi from LOAILUONG) where MaNV=@manv
-end
-
---Cap Nhat Tinh Luong khi thay doi cac gia tri--
-go
-create trigger trigg_chg_CHAMCONG_to_TINHLUONG 
-on CHAMCONG after update
-as
-declare @manv char(10)
-select @manv = MaNV from inserted
-begin
-	update TINHLUONG set TongLuong = (select TongLuong from CHAMCONG where MaNV=@manv),TongPhuCap=(select sum(SoTien) from PHUCAP where MaNV=@manv)
-	where MaNV=@manv
-end
-
---
-go
-create trigger trgg_chg_TINHLUONG
-on TINHLUONG after update
-as
-declare @manv char(10)
-select @manv = MaNV from inserted
-begin
-	update TINHLUONG set ThucNhan=TongLuong+TongPhuCap 
-	where MaNV=@manv
-end
-
-*/
-
---trigger thong bao
-
---
-
-/*
-create function f_TinhLuong()
-returns table 
-as
-begin
-	declare @LoaiLaoDong nvarchar(20),@TienTheoDonvi int,@ThoiGianLamDonvi int, @TangCa int,@Heso float
-	select @LoaiLaoDong=LoaiLaoDong,@TienTheoDonvi=TienTheoDonvi from NHANVIEN;
-	select @ThoiGianLamDonvi=ThoiGianLamDonvi,@TangCa=TangCa from CHAMCONG;
-	
-*/
-
-
---Thong ke
-/*
-go
-select NHANVIEN.MaNV,NHANVIEN.TienTheoDonVi,LoaiLaoDong,ThoiGianLamDonVi,TangCa from
-NHANVIEN join
-(select MaNV,sum(ThoiGianLamDonVi)as ThoiGianLamDonVi,sum(TangCa)as TangCa from CHAMCONG  where MONTH(NgayChamCong)=5 and YEAR(NgayChamCong)=2022group by(MaNV) )as T1
-on NHANVIEN.MaNV=T1.MaNV
-*/
 go
 create function f_ThongKe(@ngay date)
 returns table
@@ -718,7 +632,23 @@ grant select on f_TinhLuong to employee_manage
 go
 alter role employee_manage add member Manager
 
+--Trigger
+go
+create trigger trg_ChamCongTinhLuong
+on CHAMCONG after insert
+as 
+declare @date date = getdate() 
+begin
+	exec sp_TinhLuong @date
+end
 
+
+/*
+exec sp_ChamCong 'NV0000',8,8
+
+select * from CHAMCONG
+exec sp_TinhLuong '2022-1-1' -- (select convert(date,GETDATE()))
+select *from TINHLUONG
 /*
 
 select *from f_TinhLuong('2020-2-2')
@@ -755,4 +685,90 @@ f_ThongKe @date
 connetionString = @"Data Source=.;Initial Catalog=QUANLYLUONGNV;User ID=username;Password=pass";
 */
 
-drop proc sp_ChamCong
+-------TRIGGER-------
+--Nhap Nhan Vien--
+/*
+go
+create trigger trgg_new_NHANVIEN
+on NHANVIEN after insert
+as
+begin
+	insert into CHAMCONG(MaNV,ThoiGianLamDonVi,TangCa,TongLuong)values((select MaNV from inserted),0,0,0)
+	insert into PHUCAP(MaNV,SoTien,LyDo)values((select MaNV from inserted),0,N'Nhan vien moi')
+	insert into TINHLUONG(MaNV,TongLuong,TongPhuCap,ThucNhan)values((select MaNV from inserted),0,0,0)
+end
+*/
+--Thay Doi Cham Cong--
+/*
+go 
+create trigger trgg_chg_CHAMCONG
+on CHAMCONG after update
+as
+declare @donvi int,
+		@loai nvarchar(20),
+		@manv char(10)
+select @donvi = ThoiGianLamDonVi from inserted
+select @loai = LoaiLaoDong from LOAILUONG where MaNV=(@manv)
+if (@donvi>30 and @loai=N'ToanThoiGian')
+begin
+	update CHAMCONG set ThoiGianLamDonVi = 30 where MaNV = (@manv)
+end
+
+if(@donvi>12 and @loai=N'BanThoiGian')
+begin
+	update CHAMCONG set ThoiGianLamDonVi = 12 where MaNV = (@manv)
+end
+begin
+	update CHAMCONG set TongLuong = ThoiGianLamDonVi*(select TienMoiDonVi from LOAILUONG) where MaNV=@manv
+end
+
+--Cap Nhat Tinh Luong khi thay doi cac gia tri--
+go
+create trigger trigg_chg_CHAMCONG_to_TINHLUONG 
+on CHAMCONG after update
+as
+declare @manv char(10)
+select @manv = MaNV from inserted
+begin
+	update TINHLUONG set TongLuong = (select TongLuong from CHAMCONG where MaNV=@manv),TongPhuCap=(select sum(SoTien) from PHUCAP where MaNV=@manv)
+	where MaNV=@manv
+end
+
+--
+go
+create trigger trgg_chg_TINHLUONG
+on TINHLUONG after update
+as
+declare @manv char(10)
+select @manv = MaNV from inserted
+begin
+	update TINHLUONG set ThucNhan=TongLuong+TongPhuCap 
+	where MaNV=@manv
+end
+
+*/
+
+--trigger thong bao
+
+--
+
+/*
+create function f_TinhLuong()
+returns table 
+as
+begin
+	declare @LoaiLaoDong nvarchar(20),@TienTheoDonvi int,@ThoiGianLamDonvi int, @TangCa int,@Heso float
+	select @LoaiLaoDong=LoaiLaoDong,@TienTheoDonvi=TienTheoDonvi from NHANVIEN;
+	select @ThoiGianLamDonvi=ThoiGianLamDonvi,@TangCa=TangCa from CHAMCONG;
+	
+*/
+
+
+--Thong ke
+/*
+go
+select NHANVIEN.MaNV,NHANVIEN.TienTheoDonVi,LoaiLaoDong,ThoiGianLamDonVi,TangCa from
+NHANVIEN join
+(select MaNV,sum(ThoiGianLamDonVi)as ThoiGianLamDonVi,sum(TangCa)as TangCa from CHAMCONG  where MONTH(NgayChamCong)=5 and YEAR(NgayChamCong)=2022group by(MaNV) )as T1
+on NHANVIEN.MaNV=T1.MaNV
+*/
