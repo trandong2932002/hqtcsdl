@@ -642,6 +642,47 @@ begin
 	exec sp_TinhLuong @date
 end
 
+--Table
+go
+create proc getDataChiNhanh 
+as
+	select *from CHINHANH order by MaCN
+	return;
+
+go
+create proc getDataPhongBan
+as	
+	select *from PHONGBAN order by MaPB
+
+go
+create proc getDataCongViec
+as
+	select *from CONGVIEC order by MaCV
+
+exec getDataPhongBan
+
+go
+create proc getDataNhanVien
+as
+	select distinct *from NHANVIEN A 
+	inner join
+	(select MaCV, TenCV from CONGVIEC)B on A.MaCV = B.MaCV
+
+
+exec getDataNhanVien
+
+
+--select *from f_TinhLuong('2022/6/1')
+
+/*
+go 
+select * from 
+(
+(
+(	select *from NHANVIEN)T1 
+	inner join (select MaCV,TenCV from CONGVIEC)T2 on T1.MaCV = T2.MaCV 
+	inner join (select MaPB,TenPB from PHONGBAN)T3 on T1.MaPB = T3.MaPB))
+*/
 
 /*
 exec sp_ChamCong 'NV0000',8,8
@@ -649,6 +690,7 @@ exec sp_ChamCong 'NV0000',8,8
 select * from CHAMCONG
 exec sp_TinhLuong '2022-1-1' -- (select convert(date,GETDATE()))
 select *from TINHLUONG
+*/
 /*
 
 select *from f_TinhLuong('2020-2-2')
@@ -772,3 +814,4 @@ NHANVIEN join
 (select MaNV,sum(ThoiGianLamDonVi)as ThoiGianLamDonVi,sum(TangCa)as TangCa from CHAMCONG  where MONTH(NgayChamCong)=5 and YEAR(NgayChamCong)=2022group by(MaNV) )as T1
 on NHANVIEN.MaNV=T1.MaNV
 */
+
