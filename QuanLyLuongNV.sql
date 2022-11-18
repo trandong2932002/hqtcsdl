@@ -590,6 +590,55 @@ begin tran
 commit tran
  
 
+
+
+go
+alter role employee_manage add member Manager
+
+--Trigger
+go
+create trigger trg_ChamCongTinhLuong
+on CHAMCONG after insert
+as 
+declare @date date = getdate() 
+begin
+	exec sp_TinhLuong @date
+end
+
+--Table
+go
+create proc getDataChiNhanh 
+as
+	select *from CHINHANH order by MaCN
+	return;
+
+go
+create proc getDataPhongBan
+as	
+	select *from PHONGBAN order by MaPB
+
+go
+create proc getDataCongViec
+as
+	select *from CONGVIEC order by MaCV
+
+
+go
+create proc getDataNhanVien
+as
+	select distinct *from NHANVIEN A 
+
+
+
+go
+create proc getDataChamCong @NgayChamCong date
+as
+	select A.MaNV, MaPB,MaCV, TenNV, ISNULL(ThoiGianLamDonVi,0)as ThoiGianLamDonVi,ISNULL(TangCa,0)as TangCa from NHANVIEN A left join
+	(select MaNV, ThoiGianLamDonVi, TangCa from CHAMCONG where NgayChamCong = @NgayChamCong)B on A.MaNV=B.MaNV
+
+
+
+
 --Tao User 
 --Admin:admin
 go
@@ -628,49 +677,19 @@ go
 grant execute on sp_TinhLuong to employee_manage
 go
 grant select on f_TinhLuong to employee_manage
-
 go
-alter role employee_manage add member Manager
-
---Trigger
+grant execute on getDataChiNhanh to employee_manage
 go
-create trigger trg_ChamCongTinhLuong
-on CHAMCONG after insert
-as 
-declare @date date = getdate() 
-begin
-	exec sp_TinhLuong @date
-end
-
---Table
+grant execute on getDataPhongBan to employee_manage
 go
-create proc getDataChiNhanh 
-as
-	select *from CHINHANH order by MaCN
-	return;
-
+grant execute on getDataCongViec to employee_manage
 go
-create proc getDataPhongBan
-as	
-	select *from PHONGBAN order by MaPB
-
+grant execute on getDataNhanVien to employee_manage
 go
-create proc getDataCongViec
-as
-	select *from CONGVIEC order by MaCV
-
-exec getDataPhongBan
-
-go
-create proc getDataNhanVien
-as
-	select distinct *from NHANVIEN A 
-	inner join
-	(select MaCV, TenCV from CONGVIEC)B on A.MaCV = B.MaCV
+grant execute on getDataChamCong to employee_manage
 
 
-exec getDataNhanVien
-
+--exec getDataChamCong '2022-10-1'
 
 --select *from f_TinhLuong('2022/6/1')
 
