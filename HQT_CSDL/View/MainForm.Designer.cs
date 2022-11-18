@@ -65,11 +65,14 @@
             this.dataNhanVien = new System.Windows.Forms.DataGridView();
             this.tabChamCong = new System.Windows.Forms.TabPage();
             this.tabTinhLuong = new System.Windows.Forms.TabPage();
+            this.dataChamCong = new System.Windows.Forms.DataGridView();
             this.tabControl.SuspendLayout();
             this.tabNhanVien.SuspendLayout();
             this.groupFilter.SuspendLayout();
             this.groupCreateandEdit.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataNhanVien)).BeginInit();
+            this.tabChamCong.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataChamCong)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl
@@ -402,6 +405,7 @@
             // 
             // tabChamCong
             // 
+            this.tabChamCong.Controls.Add(this.dataChamCong);
             this.tabChamCong.Location = new System.Drawing.Point(4, 22);
             this.tabChamCong.Name = "tabChamCong";
             this.tabChamCong.Padding = new System.Windows.Forms.Padding(3);
@@ -420,6 +424,14 @@
             this.tabTinhLuong.Text = "Bảng Lương";
             this.tabTinhLuong.UseVisualStyleBackColor = true;
             // 
+            // dataChamCong
+            // 
+            this.dataChamCong.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataChamCong.Location = new System.Drawing.Point(6, 6);
+            this.dataChamCong.Name = "dataChamCong";
+            this.dataChamCong.Size = new System.Drawing.Size(1220, 619);
+            this.dataChamCong.TabIndex = 0;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -437,6 +449,8 @@
             this.groupCreateandEdit.ResumeLayout(false);
             this.groupCreateandEdit.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataNhanVien)).EndInit();
+            this.tabChamCong.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataChamCong)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -480,6 +494,7 @@
         private System.Windows.Forms.Button buttonDelete;
         private System.Windows.Forms.TextBox textCreateMaNV;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.DataGridView dataChamCong;
     }
 }
 

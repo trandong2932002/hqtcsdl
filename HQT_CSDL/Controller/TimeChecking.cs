@@ -23,7 +23,7 @@ namespace HQT_CSDL.Controller
             set
             {
                 dataGridViewTimeChecking = value;
-                //InitDataGridView();
+                InitDataGridView();
             }
         }
         private static List<TextBox> textBoxes;
@@ -76,7 +76,7 @@ namespace HQT_CSDL.Controller
         //
         static TimeChecking()
         {
-            //InitData();
+            InitData();
         }
 
         //
@@ -97,6 +97,92 @@ namespace HQT_CSDL.Controller
             return controlList;
         }
 
+        private static void InitData()
+        {
+            BindingSourceTimeChecking = new BindingSource();
+            ListTimeChecking = new BindingList<NhanVien>();
 
+            // employees data
+            foreach (NhanVien nhanVien in EmployeeDB.Load())
+            {
+                ListTimeChecking.Add(nhanVien);
+            }
+            ListTimeChecking = ListTimeChecking.ToSortableBindingList();
+            BindingSourceTimeChecking.DataSource = ListTimeChecking;
+        }
+
+        private static void InitDataGridView()
+        {
+            // init data grid view
+            DataGridViewTimeChecking.AutoGenerateColumns = false;
+            DataGridViewTimeChecking.DataSource = BindingSourceTimeChecking;
+
+            // user cannot resize or edit anythings
+            DataGridViewTimeChecking.RowHeadersVisible = false;
+            DataGridViewTimeChecking.AllowUserToResizeColumns = false;
+            DataGridViewTimeChecking.AllowUserToResizeRows = false;
+            DataGridViewTimeChecking.AllowUserToDeleteRows = false;
+            DataGridViewTimeChecking.AllowUserToAddRows = false;
+            DataGridViewTimeChecking.ReadOnly = true;
+
+            // define data grid view cols
+            {
+                // col: Mã nhân viên
+                DataGridViewTextBoxColumn column = new DataGridViewTextBoxColumn();
+                column.DataPropertyName = "MaNV";
+                column.Name = "Mã nhân viên";
+                column.Width = 60;
+                DataGridViewTimeChecking.Columns.Add(column);
+
+                // col: Mã phòng ban
+                column = new DataGridViewTextBoxColumn();
+                column.DataPropertyName = "MaPB";
+                column.Name = "Mã phòng ban";
+                column.Width = 60;
+                DataGridViewTimeChecking.Columns.Add(column);
+
+                // col: Mã công việc
+                column = new DataGridViewTextBoxColumn();
+                column.DataPropertyName = "MaCV";
+                column.Name = "Mã công việc";
+                column.Width = 60;
+                DataGridViewTimeChecking.Columns.Add(column);
+
+                // col: Tên nhân viên
+                column = new DataGridViewTextBoxColumn();
+                column.DataPropertyName = "TenNV";
+                column.Name = "Tên nhân viên";
+                column.Width = 180;
+                DataGridViewTimeChecking.Columns.Add(column);
+
+                // col: Giới tính
+                column = new DataGridViewTextBoxColumn();
+                column.DataPropertyName = "GioiTinh";
+                column.Name = "Giới tính";
+                column.Width = 60;
+                DataGridViewTimeChecking.Columns.Add(column);
+
+                // col: Số điện thoại
+                column = new DataGridViewTextBoxColumn();
+                column.DataPropertyName = "SoDT";
+                column.Name = "Số điện thoại";
+                column.Width = 120;
+                DataGridViewTimeChecking.Columns.Add(column);
+
+                // col: Loại lao động
+                column = new DataGridViewTextBoxColumn();
+                column.DataPropertyName = "LoaiLaoDong";
+                column.Name = "Loại lao động";
+                column.Width = 120;
+                DataGridViewTimeChecking.Columns.Add(column);
+
+                // col: Tiền theo đơn vị
+                column = new DataGridViewTextBoxColumn();
+                column.DataPropertyName = "TienTheoDonVi";
+                column.Name = "Tiền theo đơn vị";
+                column.Width = 60;
+                DataGridViewTimeChecking.Columns.Add(column);
+            }
+        }
     }
 }

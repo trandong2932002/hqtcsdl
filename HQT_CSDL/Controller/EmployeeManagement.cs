@@ -155,6 +155,11 @@ namespace HQT_CSDL.Controller
                     if (textBoxFor == "textCreate")
                     {
                         textBox.Text = emp.GetType().GetProperty(name).GetValue(emp).ToString();
+                        // disable MaNV
+                        if (name == "MaNV")
+                        {
+                            textBox.Enabled = false;
+                        }
                     }
                 }
 
@@ -447,8 +452,14 @@ namespace HQT_CSDL.Controller
                     {
                         if (Status.Text != "BẠN ĐANG THÊM NHÂN VIÊN MỚI")
                         {
-                            string empID = TextBoxes.Where(x => x.Name == "textCreateMaNV").ToList()[0].Text;
+                            TextBox textCreateMaNV = TextBoxes.Where(x => x.Name == "textCreateMaNV").ToList()[0];
+
+                            string empID = textCreateMaNV.Text;
                             string message = EmployeeDB.DeleteEmployee(empID);
+
+                            // enable MaNV
+                            textCreateMaNV.Enabled = true;
+
                             if (message is null)
                             {
                                 MessageBox.Show("Xoá nhân viên " + empID + " thành công");
@@ -479,9 +490,16 @@ namespace HQT_CSDL.Controller
                         foreach (TextBox textBox in TextBoxes)
                         {
                             string textBoxFor = textBox.Name.Substring(0, 10);
+                            string name = textBox.Name.Substring(10);
+
                             if (textBoxFor == "textCreate")
                             {
                                 textBox.Text = "";
+                                // enable MaNV
+                                if (name == "MaNV")
+                                {
+                                    textBox.Enabled = true;
+                                }
                             }
                         }
                         // clear combo box selected item
