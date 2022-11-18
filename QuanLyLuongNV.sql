@@ -317,6 +317,12 @@ begin tran
 		rollback
 		return
 	end
+	if not exists (select 1 from CHINHANH where MaCN=@MaCN)
+	begin
+		raiserror('Chi nhanh khong ton tai',16,1)
+		rollback
+		return
+	end
 	if(@DiaChi is null or @DiaChi = ' ')
 	begin
 		raiserror('Dia chi khong the bo trong',16,1)
@@ -345,6 +351,12 @@ begin tran
 	if(@MaPB is null or @MaPB = ' ')
 	begin
 		raiserror('Hay chon phong ban',16,1)
+		rollback
+		return
+	end
+	if not exists (select 1 from PHONGBAN where MaPB=@MaPB)
+	begin
+		raiserror('Phong ban khong ton tai',16,1)
 		rollback
 		return
 	end
@@ -379,6 +391,12 @@ begin tran
 		rollback
 		return
 	end
+	if not exists (select 1 from CONGVIEC where MaCV=@MaCV)
+	begin
+		raiserror('Cong viec khong ton tai',16,1)
+		rollback
+		return
+	end
 	if(@TenCV is null or @TenCV = ' ')
 	begin
 		raiserror('Khong de trong Ten cong viec',16,1)
@@ -407,6 +425,12 @@ begin tran
 	if(@MaNV is null or @MaNV = ' ')
 	begin
 		raiserror('Hay nhap ma nhan vien',16,1)
+		rollback
+		return
+	end
+	if not exists (select 1 from NHANVIEN where MaNV=@MaNV)
+	begin
+		raiserror('Nhan vien khong ton tai',16,1)
 		rollback
 		return
 	end
