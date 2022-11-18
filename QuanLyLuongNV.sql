@@ -270,12 +270,6 @@ begin tran
 		rollback
 		return
 	end
-	if exists (select 1 from CHAMCONG where MaNV = @MaNV and NgayChamCong=convert(date,GETDATE()))
-	begin
-		raiserror('Da thuc hien cham cong truoc do',16,1)
-		rollback
-		return
-	end
 	if(@ThoiGian is null or @ThoiGian < 0 or @ThoiGian>16)
 	begin
 		raiserror('De nghi nhap thoi gian chinh xac',16,1)
@@ -287,6 +281,19 @@ begin tran
 		raiserror('De nghi nhap thoi gian tang ca chinh xac',16,1)
 		rollback
 		return
+	end
+	if exists (select 1 from CHAMCONG where MaNV = @MaNV and NgayChamCong=convert(date,GETDATE()))
+	begin
+		if((select TangCa from CHAMCONG where MaNV = @MaNV and NgayChamCong=convert(date,GETDATE()))=0 and @TangCa != 0)
+		begin
+			delete from CHAMCONG where MaNV = @MaNV and NgayChamCong=convert(date,GETDATE())
+		end
+		else
+		begin
+			raiserror('Da thuc hien cham cong truoc do',16,1)
+			rollback
+			return
+		end
 	end
 	INSERT into CHAMCONG values(@MaNV,@ThoiGian,@TangCa,GETDATE())
 	if(@@ERROR<>0)
@@ -592,8 +599,6 @@ commit tran
 
 
 
-go
-alter role employee_manage add member Manager
 
 --Trigger
 go
@@ -605,6 +610,19 @@ begin
 	exec sp_TinhLuong @date
 end
 
+go 
+create trigger trg_TangCa
+on CHAMCONG after insert
+as
+declare @TangCa int = (select TangCa from inserted),
+		@ThoiGian int = (select ThoiGianLamDonVi from inserted)
+begin
+	if(@ThoiGian < 8 and @TangCa >0)
+	begin
+		rollback transaction
+		raiserror('Chua lam du gio de tang ca',16,1)
+	end
+end
 --Table
 go
 create proc getDataChiNhanh 
@@ -688,6 +706,8 @@ grant execute on getDataNhanVien to employee_manage
 go
 grant execute on getDataChamCong to employee_manage
 
+go
+alter role employee_manage add member Manager
 
 --exec getDataChamCong '2022-10-1'
 
