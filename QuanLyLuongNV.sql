@@ -678,6 +678,10 @@ as
 	select A.MaNV, MaPB,MaCV, TenNV, ISNULL(ThoiGianLamDonVi,0)as ThoiGianLamDonVi,ISNULL(TangCa,0)as TangCa from NHANVIEN A left join
 	(select MaNV, ThoiGianLamDonVi, TangCa from CHAMCONG where NgayChamCong = @NgayChamCong)B on A.MaNV=B.MaNV
 
+go
+create proc getDataTinhLuong @NgayChamCong date
+as
+	select *from f_TinhLuong(@NgayChamCong)
 
 
 
@@ -729,7 +733,8 @@ go
 grant execute on getDataNhanVien to employee_manage
 go
 grant execute on getDataChamCong to employee_manage
-
+go
+grant execute on getDataTinhLuong to employee_manage
 go
 alter role employee_manage add member Manager
 
