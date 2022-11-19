@@ -12,6 +12,7 @@ namespace HQT_CSDL.View
             EmployeeManagement.TabEmployee = tabNhanVien;
             TimeChecking.TabTimeChecking = tabChamCong;
             //TimeChecking
+            tabControl.SelectedIndex = 1;
         }
     }
 }

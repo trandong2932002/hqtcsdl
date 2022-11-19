@@ -8,10 +8,10 @@ namespace HQT_CSDL.Data
     public class ConnectionDB
     {
 
-        //private static SqlConnection conn = new SqlConnection("Data Source=DESKTOP-RF7863D;Initial Catalog=QUANLYLUONGNV;Integrated Security=True");
+        private static SqlConnection conn = new SqlConnection("Data Source=DESKTOP-RF7863D;Initial Catalog=QUANLYLUONGNV;Integrated Security=True");
         //public static string ConnString;
         //private static SqlConnection conn = new SqlConnection(ConnString);
-        private static SqlConnection conn = new SqlConnection("Data Source=.;Initial Catalog=QUANLYLUONGNV;Integrated Security=True");
+        //private static SqlConnection conn = new SqlConnection("Data Source=.;Initial Catalog=QUANLYLUONGNV;Integrated Security=True");
         //private static SqlConnection conn = new SqlConnection("Data Source=.;Initial Catalog=QUANLYLUONGNV;User ID=" + login.name + ";Password=" + login.password + ";");
 
 
@@ -55,6 +55,32 @@ namespace HQT_CSDL.Data
             {
                 conn.Close();
                 return e.Message;
+            }
+        }
+
+        public static DataTable ExecStoredProduceTable(string query, List<SqlParameter> parameters)
+        {
+            try
+            {
+                conn.Open();
+                SqlDataAdapter adapter = new SqlDataAdapter();
+                adapter.SelectCommand = new SqlCommand(query, conn);
+                adapter.SelectCommand.CommandType = CommandType.StoredProcedure;
+                foreach (SqlParameter parameter in parameters)
+                {
+                    adapter.SelectCommand.Parameters.Add(parameter);
+                }
+                DataTable table = new DataTable();
+                adapter.Fill(table);
+
+                conn.Close();
+                return table;
+            }
+            catch (SqlException e)
+            {
+                conn.Close();
+                Console.WriteLine(e.Message);
+                return null;
             }
         }
     }

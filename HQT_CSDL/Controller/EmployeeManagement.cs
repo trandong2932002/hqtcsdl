@@ -15,6 +15,7 @@ namespace HQT_CSDL.Controller
         private static BindingList<NhanVien> ListEmployee { get; set; }
         private static BindingList<NhanVien> ListEmployeeFiltered { get; set; }
         public static List<CongViec> ListJob { get; set; }
+        public static List<string> JobNames { get; set; }
 
         // view controls
         private static DataGridView dataGridViewEmployee;
@@ -261,10 +262,6 @@ namespace HQT_CSDL.Controller
                 {
                     button.Click += new EventHandler((object sender, EventArgs e) =>
                     {
-                        if (BindingSourceEmployee.List.Count == ListEmployee.Count)
-                        {
-                            return;
-                        }
                         // clear text box content
                         foreach (TextBox textBox in TextBoxes)
                         {
@@ -523,7 +520,7 @@ namespace HQT_CSDL.Controller
         {
             List<string> sexs = ListEmployee.Select(x => x.GioiTinh).Distinct().ToList();
 
-            List<string> jobIDs = ListJob.OrderBy(x => x.MaCV).Select(x => string.Concat(x.MaCV, " - ", x.TenCV)).Distinct().ToList();
+            JobNames = ListJob.OrderBy(x => x.MaCV).Select(x => string.Concat(x.MaCV, " - ", x.TenCV)).Distinct().ToList();
 
             List<string> employmentTypes = ListEmployee.Select(x => x.LoaiLaoDong).Distinct().ToList();
 
@@ -556,9 +553,9 @@ namespace HQT_CSDL.Controller
                         break;
                     // job
                     case "MaCV":
-                        foreach (string jobID in jobIDs)
+                        foreach (string job in JobNames)
                         {
-                            comboBox.Items.Add(jobID);
+                            comboBox.Items.Add(job);
                         }
                         comboBox.SelectedIndex = 0;
                         break;

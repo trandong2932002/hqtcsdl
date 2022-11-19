@@ -64,14 +64,36 @@
             this.label2 = new System.Windows.Forms.Label();
             this.dataNhanVien = new System.Windows.Forms.DataGridView();
             this.tabChamCong = new System.Windows.Forms.TabPage();
-            this.tabTinhLuong = new System.Windows.Forms.TabPage();
+            this.group2TimeChecking = new System.Windows.Forms.GroupBox();
+            this.text2CheckMaNV = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.button2CheckClear = new System.Windows.Forms.Button();
+            this.button2CheckCheck = new System.Windows.Forms.Button();
+            this.combo2CheckThoiGianLamDonVi = new System.Windows.Forms.ComboBox();
+            this.combo2CheckTangCa = new System.Windows.Forms.ComboBox();
+            this.label17 = new System.Windows.Forms.Label();
+            this.group2Filter = new System.Windows.Forms.GroupBox();
+            this.combo2FilterIsChecked = new System.Windows.Forms.ComboBox();
+            this.text2FilterTenNV = new System.Windows.Forms.TextBox();
+            this.text2FilterMaNV = new System.Windows.Forms.TextBox();
+            this.text2FilterMaPB = new System.Windows.Forms.TextBox();
+            this.combo2FilterMaCV = new System.Windows.Forms.ComboBox();
+            this.text2FilterThoiGianLamDonVi = new System.Windows.Forms.TextBox();
+            this.text2FilterTangCa = new System.Windows.Forms.TextBox();
+            this.button2FilterClear = new System.Windows.Forms.Button();
+            this.button2FilterFind = new System.Windows.Forms.Button();
             this.dataChamCong = new System.Windows.Forms.DataGridView();
+            this.tabTinhLuong = new System.Windows.Forms.TabPage();
             this.tabControl.SuspendLayout();
             this.tabNhanVien.SuspendLayout();
             this.groupFilter.SuspendLayout();
             this.groupCreateandEdit.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataNhanVien)).BeginInit();
             this.tabChamCong.SuspendLayout();
+            this.group2TimeChecking.SuspendLayout();
+            this.group2Filter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataChamCong)).BeginInit();
             this.SuspendLayout();
             // 
@@ -405,6 +427,8 @@
             // 
             // tabChamCong
             // 
+            this.tabChamCong.Controls.Add(this.group2TimeChecking);
+            this.tabChamCong.Controls.Add(this.group2Filter);
             this.tabChamCong.Controls.Add(this.dataChamCong);
             this.tabChamCong.Location = new System.Drawing.Point(4, 22);
             this.tabChamCong.Name = "tabChamCong";
@@ -413,6 +437,202 @@
             this.tabChamCong.TabIndex = 1;
             this.tabChamCong.Text = "Chấm công";
             this.tabChamCong.UseVisualStyleBackColor = true;
+            // 
+            // group2TimeChecking
+            // 
+            this.group2TimeChecking.Controls.Add(this.text2CheckMaNV);
+            this.group2TimeChecking.Controls.Add(this.label9);
+            this.group2TimeChecking.Controls.Add(this.label10);
+            this.group2TimeChecking.Controls.Add(this.label11);
+            this.group2TimeChecking.Controls.Add(this.button2CheckClear);
+            this.group2TimeChecking.Controls.Add(this.button2CheckCheck);
+            this.group2TimeChecking.Controls.Add(this.combo2CheckThoiGianLamDonVi);
+            this.group2TimeChecking.Controls.Add(this.combo2CheckTangCa);
+            this.group2TimeChecking.Controls.Add(this.label17);
+            this.group2TimeChecking.Location = new System.Drawing.Point(906, 6);
+            this.group2TimeChecking.Name = "group2TimeChecking";
+            this.group2TimeChecking.Size = new System.Drawing.Size(317, 278);
+            this.group2TimeChecking.TabIndex = 38;
+            this.group2TimeChecking.TabStop = false;
+            this.group2TimeChecking.Text = "Thêm/Sửa nhân viên";
+            // 
+            // text2CheckMaNV
+            // 
+            this.text2CheckMaNV.Enabled = false;
+            this.text2CheckMaNV.Location = new System.Drawing.Point(140, 62);
+            this.text2CheckMaNV.Name = "text2CheckMaNV";
+            this.text2CheckMaNV.Size = new System.Drawing.Size(140, 20);
+            this.text2CheckMaNV.TabIndex = 38;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(40, 66);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(74, 13);
+            this.label9.TabIndex = 37;
+            this.label9.Text = "Mã Nhân viên";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.label10.Location = new System.Drawing.Point(129, 30);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(72, 13);
+            this.label10.TabIndex = 35;
+            this.label10.Text = "CHẤM CÔNG";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(40, 114);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(103, 13);
+            this.label11.TabIndex = 26;
+            this.label11.Text = "Thời gian làm đơn vị";
+            // 
+            // button2CheckClear
+            // 
+            this.button2CheckClear.Location = new System.Drawing.Point(108, 203);
+            this.button2CheckClear.Name = "button2CheckClear";
+            this.button2CheckClear.Size = new System.Drawing.Size(60, 23);
+            this.button2CheckClear.TabIndex = 34;
+            this.button2CheckClear.Text = "Huỷ";
+            this.button2CheckClear.UseVisualStyleBackColor = true;
+            // 
+            // button2CheckCheck
+            // 
+            this.button2CheckCheck.Location = new System.Drawing.Point(178, 203);
+            this.button2CheckCheck.Name = "button2CheckCheck";
+            this.button2CheckCheck.Size = new System.Drawing.Size(60, 23);
+            this.button2CheckCheck.TabIndex = 33;
+            this.button2CheckCheck.Text = "Chấm";
+            this.button2CheckCheck.UseVisualStyleBackColor = true;
+            // 
+            // combo2CheckThoiGianLamDonVi
+            // 
+            this.combo2CheckThoiGianLamDonVi.Enabled = false;
+            this.combo2CheckThoiGianLamDonVi.FormattingEnabled = true;
+            this.combo2CheckThoiGianLamDonVi.Location = new System.Drawing.Point(140, 110);
+            this.combo2CheckThoiGianLamDonVi.Name = "combo2CheckThoiGianLamDonVi";
+            this.combo2CheckThoiGianLamDonVi.Size = new System.Drawing.Size(140, 21);
+            this.combo2CheckThoiGianLamDonVi.TabIndex = 22;
+            // 
+            // combo2CheckTangCa
+            // 
+            this.combo2CheckTangCa.Enabled = false;
+            this.combo2CheckTangCa.FormattingEnabled = true;
+            this.combo2CheckTangCa.Location = new System.Drawing.Point(140, 158);
+            this.combo2CheckTangCa.Name = "combo2CheckTangCa";
+            this.combo2CheckTangCa.Size = new System.Drawing.Size(140, 21);
+            this.combo2CheckTangCa.TabIndex = 23;
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(40, 162);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(47, 13);
+            this.label17.TabIndex = 27;
+            this.label17.Text = "Tăng ca";
+            // 
+            // group2Filter
+            // 
+            this.group2Filter.Controls.Add(this.combo2FilterIsChecked);
+            this.group2Filter.Controls.Add(this.text2FilterTenNV);
+            this.group2Filter.Controls.Add(this.text2FilterMaNV);
+            this.group2Filter.Controls.Add(this.text2FilterMaPB);
+            this.group2Filter.Controls.Add(this.combo2FilterMaCV);
+            this.group2Filter.Controls.Add(this.text2FilterThoiGianLamDonVi);
+            this.group2Filter.Controls.Add(this.text2FilterTangCa);
+            this.group2Filter.Controls.Add(this.button2FilterClear);
+            this.group2Filter.Controls.Add(this.button2FilterFind);
+            this.group2Filter.Location = new System.Drawing.Point(4, 6);
+            this.group2Filter.Name = "group2Filter";
+            this.group2Filter.Size = new System.Drawing.Size(889, 53);
+            this.group2Filter.TabIndex = 37;
+            this.group2Filter.TabStop = false;
+            this.group2Filter.Text = "Lọc nhân viên";
+            // 
+            // combo2FilterIsChecked
+            // 
+            this.combo2FilterIsChecked.DropDownWidth = 120;
+            this.combo2FilterIsChecked.FormattingEnabled = true;
+            this.combo2FilterIsChecked.Location = new System.Drawing.Point(636, 19);
+            this.combo2FilterIsChecked.Name = "combo2FilterIsChecked";
+            this.combo2FilterIsChecked.Size = new System.Drawing.Size(86, 21);
+            this.combo2FilterIsChecked.TabIndex = 7;
+            // 
+            // text2FilterTenNV
+            // 
+            this.text2FilterTenNV.Location = new System.Drawing.Point(276, 19);
+            this.text2FilterTenNV.Name = "text2FilterTenNV";
+            this.text2FilterTenNV.Size = new System.Drawing.Size(176, 20);
+            this.text2FilterTenNV.TabIndex = 4;
+            // 
+            // text2FilterMaNV
+            // 
+            this.text2FilterMaNV.Location = new System.Drawing.Point(6, 19);
+            this.text2FilterMaNV.Name = "text2FilterMaNV";
+            this.text2FilterMaNV.Size = new System.Drawing.Size(86, 20);
+            this.text2FilterMaNV.TabIndex = 1;
+            // 
+            // text2FilterMaPB
+            // 
+            this.text2FilterMaPB.Location = new System.Drawing.Point(96, 19);
+            this.text2FilterMaPB.Name = "text2FilterMaPB";
+            this.text2FilterMaPB.Size = new System.Drawing.Size(86, 20);
+            this.text2FilterMaPB.TabIndex = 2;
+            // 
+            // combo2FilterMaCV
+            // 
+            this.combo2FilterMaCV.DropDownWidth = 120;
+            this.combo2FilterMaCV.FormattingEnabled = true;
+            this.combo2FilterMaCV.Location = new System.Drawing.Point(186, 19);
+            this.combo2FilterMaCV.Name = "combo2FilterMaCV";
+            this.combo2FilterMaCV.Size = new System.Drawing.Size(86, 21);
+            this.combo2FilterMaCV.TabIndex = 3;
+            // 
+            // text2FilterThoiGianLamDonVi
+            // 
+            this.text2FilterThoiGianLamDonVi.Location = new System.Drawing.Point(456, 19);
+            this.text2FilterThoiGianLamDonVi.Name = "text2FilterThoiGianLamDonVi";
+            this.text2FilterThoiGianLamDonVi.Size = new System.Drawing.Size(86, 20);
+            this.text2FilterThoiGianLamDonVi.TabIndex = 5;
+            // 
+            // text2FilterTangCa
+            // 
+            this.text2FilterTangCa.Location = new System.Drawing.Point(546, 19);
+            this.text2FilterTangCa.Name = "text2FilterTangCa";
+            this.text2FilterTangCa.Size = new System.Drawing.Size(86, 20);
+            this.text2FilterTangCa.TabIndex = 6;
+            // 
+            // button2FilterClear
+            // 
+            this.button2FilterClear.Location = new System.Drawing.Point(809, 18);
+            this.button2FilterClear.Name = "button2FilterClear";
+            this.button2FilterClear.Size = new System.Drawing.Size(75, 23);
+            this.button2FilterClear.TabIndex = 9;
+            this.button2FilterClear.Text = "Xoá bộ lọc";
+            this.button2FilterClear.UseVisualStyleBackColor = true;
+            // 
+            // button2FilterFind
+            // 
+            this.button2FilterFind.Location = new System.Drawing.Point(728, 18);
+            this.button2FilterFind.Name = "button2FilterFind";
+            this.button2FilterFind.Size = new System.Drawing.Size(75, 23);
+            this.button2FilterFind.TabIndex = 8;
+            this.button2FilterFind.Text = "Tìm kiếm";
+            this.button2FilterFind.UseVisualStyleBackColor = true;
+            // 
+            // dataChamCong
+            // 
+            this.dataChamCong.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataChamCong.Location = new System.Drawing.Point(6, 65);
+            this.dataChamCong.Name = "dataChamCong";
+            this.dataChamCong.Size = new System.Drawing.Size(881, 560);
+            this.dataChamCong.TabIndex = 0;
             // 
             // tabTinhLuong
             // 
@@ -423,14 +643,6 @@
             this.tabTinhLuong.TabIndex = 2;
             this.tabTinhLuong.Text = "Bảng Lương";
             this.tabTinhLuong.UseVisualStyleBackColor = true;
-            // 
-            // dataChamCong
-            // 
-            this.dataChamCong.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataChamCong.Location = new System.Drawing.Point(6, 6);
-            this.dataChamCong.Name = "dataChamCong";
-            this.dataChamCong.Size = new System.Drawing.Size(1220, 619);
-            this.dataChamCong.TabIndex = 0;
             // 
             // MainForm
             // 
@@ -450,6 +662,10 @@
             this.groupCreateandEdit.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataNhanVien)).EndInit();
             this.tabChamCong.ResumeLayout(false);
+            this.group2TimeChecking.ResumeLayout(false);
+            this.group2TimeChecking.PerformLayout();
+            this.group2Filter.ResumeLayout(false);
+            this.group2Filter.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataChamCong)).EndInit();
             this.ResumeLayout(false);
 
@@ -495,6 +711,26 @@
         private System.Windows.Forms.TextBox textCreateMaNV;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.DataGridView dataChamCong;
+        private System.Windows.Forms.GroupBox group2Filter;
+        private System.Windows.Forms.TextBox text2FilterTenNV;
+        private System.Windows.Forms.TextBox text2FilterMaNV;
+        private System.Windows.Forms.TextBox text2FilterMaPB;
+        private System.Windows.Forms.ComboBox combo2FilterMaCV;
+        private System.Windows.Forms.TextBox text2FilterThoiGianLamDonVi;
+        private System.Windows.Forms.TextBox text2FilterTangCa;
+        private System.Windows.Forms.Button button2FilterClear;
+        private System.Windows.Forms.Button button2FilterFind;
+        private System.Windows.Forms.GroupBox group2TimeChecking;
+        private System.Windows.Forms.TextBox text2CheckMaNV;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Button button2CheckClear;
+        private System.Windows.Forms.Button button2CheckCheck;
+        private System.Windows.Forms.ComboBox combo2CheckThoiGianLamDonVi;
+        private System.Windows.Forms.ComboBox combo2CheckTangCa;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.ComboBox combo2FilterIsChecked;
     }
 }
 
