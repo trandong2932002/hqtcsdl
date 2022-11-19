@@ -388,6 +388,9 @@ namespace HQT_CSDL.Controller
 
                         // success -> clear form
                         Buttons.Where(x => x.Name == "button2CheckClear").FirstOrDefault().PerformClick();
+
+                        // success -> reload salary (lazy load: when salary tab is active, reload data)
+                        Salary.NeedReload = true;
                     });
                 }
 

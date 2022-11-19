@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Windows.Forms;
 
 
@@ -12,6 +13,9 @@ namespace HQT_CSDL.Controller
 {
     public static class Salary
     {
+        // flag
+        public static bool NeedReload { get; set; }
+
         // data
         private static BindingSource BindingSourceSalary { get; set; }
         private static BindingList<TinhLuong> ListSalary { get; set; }
@@ -65,11 +69,14 @@ namespace HQT_CSDL.Controller
             set
             {
                 tabSalary = value;
+                InitTab();
+
                 DataGridViewSalary = tabSalary.Controls.OfType<DataGridView>().Cast<DataGridView>().FirstOrDefault();
 
                 TextBoxes = GetAllControlOfType<TextBox>(TabSalary);
                 Buttons = GetAllControlOfType<Button>(TabSalary);
                 ComboBoxes = GetAllControlOfType<ComboBox>(TabSalary);
+
             }
         }
 
@@ -112,6 +119,13 @@ namespace HQT_CSDL.Controller
             }
             ListSalary = ListSalary.ToSortableBindingList();
             BindingSourceSalary.DataSource = ListSalary;
+        }
+        private static void InitTab()
+        {
+            tabSalary.Enter += new EventHandler((object sender, EventArgs e) =>
+            {
+                ReloadData();
+            });
         }
         private static void InitDataGridView()
         {
@@ -319,6 +333,52 @@ namespace HQT_CSDL.Controller
                         comboBox.SelectedIndex = 0;
                         break;
                 }
+            }
+        }
+
+        private static void ReloadData()
+        {
+            if (NeedReload)
+            {
+                // clear filter data
+                // this event cannot perform here, why? tabpage(enter event) -> button(click event) cannot run?
+                // Buttons.Where(x => x.Name == "button3FilterClear").FirstOrDefault().PerformClick();
+
+                // perform click by code, this is the stupid solution
+                {
+                    // clear text box content
+                    foreach (TextBox textBox in TextBoxes)
+                    {
+                        string textBoxFor = textBox.Name.Substring(0, 11);
+                        if (textBoxFor == "text3Filter")
+                        {
+                            textBox.Text = "";
+                        }
+                    }
+                    // clear combo box selected item
+                    foreach (ComboBox comboBox in ComboBoxes)
+                    {
+                        string comboBoxFor = comboBox.Name.Substring(0, 12);
+                        if (comboBoxFor == "combo3Filter")
+                        {
+                            comboBox.SelectedIndex = 0;
+                        }
+                    }
+
+                    // clear data
+                    BindingSourceSalary.DataSource = ListSalary;
+                    ListSalaryFiltered = null;
+                }
+
+                // reload data
+                ListSalary.Clear();
+                foreach (TinhLuong salary in SalaryDB.Load())
+                {
+                    ListSalary.Add(salary);
+                }
+                BindingSourceSalary.DataSource = ListSalary;
+
+                NeedReload = false;
             }
         }
     }
