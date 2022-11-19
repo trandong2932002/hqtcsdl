@@ -9,8 +9,10 @@ namespace HQT_CSDL.Data
     {
         public static IEnumerable<NhanVien> Load()
         {
-            string query = "select * from nhanvien order by manv";
-            DataTable dataTable = ConnectionDB.LoadTable(query);
+            string query = "getDataNhanVien";
+            
+            DataTable dataTable = ConnectionDB.ExecStoredProduceTable(query);
+
             foreach (DataRow row in dataTable.Rows)
             {
                 string maNV = row["MaNV"].ToString().Trim();

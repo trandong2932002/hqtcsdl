@@ -429,7 +429,7 @@ namespace HQT_CSDL.Controller
         {
             List<string> workTime = Enumerable.Range(0, 17).ToList().ConvertAll<string>(x => x.ToString());
 
-            List<string> extraTime = Enumerable.Range(0, 9).ToList().ConvertAll<string>(x => x.ToString());
+            List<string> overTime = Enumerable.Range(0, 9).ToList().ConvertAll<string>(x => x.ToString());
 
             foreach (ComboBox comboBox in comboBoxes)
             {
@@ -470,7 +470,7 @@ namespace HQT_CSDL.Controller
                         comboBox.SelectedIndex = 0;
                         break;
                     case "TangCa":
-                        foreach (string item in extraTime)
+                        foreach (string item in overTime)
                         {
                             comboBox.Items.Add(item);
                         }

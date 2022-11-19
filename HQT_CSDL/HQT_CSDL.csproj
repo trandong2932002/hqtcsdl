@@ -47,10 +47,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controller\EmployeeManagement.cs" />
+    <Compile Include="Controller\Salary.cs" />
     <Compile Include="Controller\TimeChecking.cs" />
     <Compile Include="Data\ConnectionDB.cs" />
     <Compile Include="Data\EmployeeDB.cs" />
     <Compile Include="Data\JobDB.cs" />
+    <Compile Include="Data\SalaryDB.cs" />
     <Compile Include="Data\TimeCheckingDB.cs" />
     <Compile Include="Model\ChamCong.cs" />
     <Compile Include="Model\ChiNhanh.cs" />

@@ -4,16 +4,21 @@ namespace HQT_CSDL.Model
 {
     public class TinhLuong
     {
-        public TinhLuong(string maNV, int tongLuong, DateTime thoiGianThang)
+        public string MaNV { get; set; }
+        public int TienTheoDonVi { get; set; }
+        public string LoaiLaoDong { get; set; }
+        public int ThoiGianLamDonVi { get; set; }
+        public int TangCa { get; set; }
+        public double TienLuong { get; set; }
+
+        public TinhLuong(string maNV, int tienTheoDonVi, string loaiLaoDong, int thoiGianLamDonVi, int tangCa, double tienLuong)
         {
             MaNV = maNV;
-            TongLuong = tongLuong;
-            ThoiGianThang = thoiGianThang;
+            TienTheoDonVi = tienTheoDonVi;
+            LoaiLaoDong = loaiLaoDong;
+            ThoiGianLamDonVi = thoiGianLamDonVi;
+            TangCa = tangCa;
+            TienLuong = tienLuong;
         }
-
-        public string MaNV { get; set; }
-        public int TongLuong { get; set; }
-        public DateTime ThoiGianThang { get; set; }
-
     }
 }

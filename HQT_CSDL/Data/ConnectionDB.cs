@@ -36,6 +36,25 @@ namespace HQT_CSDL.Data
             }
         }
 
+
+        public static string ExecStoredProduce(string query)
+        {
+            try
+            {
+                conn.Open();
+                SqlCommand command = new SqlCommand(query, conn);
+                command.CommandType = CommandType.StoredProcedure;
+                command.ExecuteNonQuery();
+                conn.Close();
+                return null;
+            }
+            catch (SqlException e)
+            {
+                conn.Close();
+                return e.Message;
+            }
+        }
+
         public static string ExecStoredProduce(string query, List<SqlParameter> parameters)
         {
             try
@@ -55,6 +74,28 @@ namespace HQT_CSDL.Data
             {
                 conn.Close();
                 return e.Message;
+            }
+        }
+
+        public static DataTable ExecStoredProduceTable(string query)
+        {
+            try
+            {
+                conn.Open();
+                SqlDataAdapter adapter = new SqlDataAdapter();
+                adapter.SelectCommand = new SqlCommand(query, conn);
+                adapter.SelectCommand.CommandType = CommandType.StoredProcedure;
+                DataTable table = new DataTable();
+                adapter.Fill(table);
+
+                conn.Close();
+                return table;
+            }
+            catch (SqlException e)
+            {
+                conn.Close();
+                Console.WriteLine(e.Message);
+                return null;
             }
         }
 

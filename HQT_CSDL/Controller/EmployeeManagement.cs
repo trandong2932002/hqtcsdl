@@ -16,6 +16,7 @@ namespace HQT_CSDL.Controller
         private static BindingList<NhanVien> ListEmployeeFiltered { get; set; }
         public static List<CongViec> ListJob { get; set; }
         public static List<string> JobNames { get; set; }
+        public static List<string> EmploymentTypes { get; set; }
 
         // view controls
         private static DataGridView dataGridViewEmployee;
@@ -522,7 +523,7 @@ namespace HQT_CSDL.Controller
 
             JobNames = ListJob.OrderBy(x => x.MaCV).Select(x => string.Concat(x.MaCV, " - ", x.TenCV)).Distinct().ToList();
 
-            List<string> employmentTypes = ListEmployee.Select(x => x.LoaiLaoDong).Distinct().ToList();
+            EmploymentTypes = ListEmployee.Select(x => x.LoaiLaoDong).Distinct().ToList();
 
             List<string> departmentIDs = ListEmployee.Select(x => x.MaPB).Distinct().OrderBy(x => x).ToList();
 
@@ -561,7 +562,7 @@ namespace HQT_CSDL.Controller
                         break;
                     // employment type
                     case "LoaiLaoDong":
-                        foreach (string employmentType in employmentTypes)
+                        foreach (string employmentType in EmploymentTypes)
                         {
                             comboBox.Items.Add(employmentType);
                         }

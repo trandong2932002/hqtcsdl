@@ -86,6 +86,16 @@
             this.button2FilterFind = new System.Windows.Forms.Button();
             this.dataChamCong = new System.Windows.Forms.DataGridView();
             this.tabTinhLuong = new System.Windows.Forms.TabPage();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.text3FilterMaNV = new System.Windows.Forms.TextBox();
+            this.text3FilterTienTheoDonVi = new System.Windows.Forms.TextBox();
+            this.combo3FilterLoaiLaoDong = new System.Windows.Forms.ComboBox();
+            this.text3FilterTienLuong = new System.Windows.Forms.TextBox();
+            this.button3FilterClear = new System.Windows.Forms.Button();
+            this.button3FilterFind = new System.Windows.Forms.Button();
+            this.dataBangLuong = new System.Windows.Forms.DataGridView();
+            this.combo3FilterTangCa = new System.Windows.Forms.ComboBox();
+            this.combo3FilterThoiGianLamDonVi = new System.Windows.Forms.ComboBox();
             this.tabControl.SuspendLayout();
             this.tabNhanVien.SuspendLayout();
             this.groupFilter.SuspendLayout();
@@ -95,6 +105,9 @@
             this.group2TimeChecking.SuspendLayout();
             this.group2Filter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataChamCong)).BeginInit();
+            this.tabTinhLuong.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataBangLuong)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl
@@ -636,6 +649,8 @@
             // 
             // tabTinhLuong
             // 
+            this.tabTinhLuong.Controls.Add(this.groupBox1);
+            this.tabTinhLuong.Controls.Add(this.dataBangLuong);
             this.tabTinhLuong.Location = new System.Drawing.Point(4, 22);
             this.tabTinhLuong.Name = "tabTinhLuong";
             this.tabTinhLuong.Padding = new System.Windows.Forms.Padding(3);
@@ -643,6 +658,97 @@
             this.tabTinhLuong.TabIndex = 2;
             this.tabTinhLuong.Text = "Bảng Lương";
             this.tabTinhLuong.UseVisualStyleBackColor = true;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.combo3FilterTangCa);
+            this.groupBox1.Controls.Add(this.combo3FilterThoiGianLamDonVi);
+            this.groupBox1.Controls.Add(this.text3FilterMaNV);
+            this.groupBox1.Controls.Add(this.text3FilterTienTheoDonVi);
+            this.groupBox1.Controls.Add(this.combo3FilterLoaiLaoDong);
+            this.groupBox1.Controls.Add(this.text3FilterTienLuong);
+            this.groupBox1.Controls.Add(this.button3FilterClear);
+            this.groupBox1.Controls.Add(this.button3FilterFind);
+            this.groupBox1.Location = new System.Drawing.Point(4, 6);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(889, 53);
+            this.groupBox1.TabIndex = 38;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Lọc nhân viên";
+            // 
+            // text3FilterMaNV
+            // 
+            this.text3FilterMaNV.Location = new System.Drawing.Point(6, 19);
+            this.text3FilterMaNV.Name = "text3FilterMaNV";
+            this.text3FilterMaNV.Size = new System.Drawing.Size(86, 20);
+            this.text3FilterMaNV.TabIndex = 1;
+            // 
+            // text3FilterTienTheoDonVi
+            // 
+            this.text3FilterTienTheoDonVi.Location = new System.Drawing.Point(96, 19);
+            this.text3FilterTienTheoDonVi.Name = "text3FilterTienTheoDonVi";
+            this.text3FilterTienTheoDonVi.Size = new System.Drawing.Size(86, 20);
+            this.text3FilterTienTheoDonVi.TabIndex = 2;
+            // 
+            // combo3FilterLoaiLaoDong
+            // 
+            this.combo3FilterLoaiLaoDong.DropDownWidth = 120;
+            this.combo3FilterLoaiLaoDong.FormattingEnabled = true;
+            this.combo3FilterLoaiLaoDong.Location = new System.Drawing.Point(186, 19);
+            this.combo3FilterLoaiLaoDong.Name = "combo3FilterLoaiLaoDong";
+            this.combo3FilterLoaiLaoDong.Size = new System.Drawing.Size(86, 21);
+            this.combo3FilterLoaiLaoDong.TabIndex = 3;
+            // 
+            // text3FilterTienLuong
+            // 
+            this.text3FilterTienLuong.Location = new System.Drawing.Point(456, 19);
+            this.text3FilterTienLuong.Name = "text3FilterTienLuong";
+            this.text3FilterTienLuong.Size = new System.Drawing.Size(86, 20);
+            this.text3FilterTienLuong.TabIndex = 6;
+            // 
+            // button3FilterClear
+            // 
+            this.button3FilterClear.Location = new System.Drawing.Point(809, 18);
+            this.button3FilterClear.Name = "button3FilterClear";
+            this.button3FilterClear.Size = new System.Drawing.Size(75, 23);
+            this.button3FilterClear.TabIndex = 10;
+            this.button3FilterClear.Text = "Xoá bộ lọc";
+            this.button3FilterClear.UseVisualStyleBackColor = true;
+            // 
+            // button3FilterFind
+            // 
+            this.button3FilterFind.Location = new System.Drawing.Point(728, 18);
+            this.button3FilterFind.Name = "button3FilterFind";
+            this.button3FilterFind.Size = new System.Drawing.Size(75, 23);
+            this.button3FilterFind.TabIndex = 9;
+            this.button3FilterFind.Text = "Tìm kiếm";
+            this.button3FilterFind.UseVisualStyleBackColor = true;
+            // 
+            // dataBangLuong
+            // 
+            this.dataBangLuong.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataBangLuong.Location = new System.Drawing.Point(6, 65);
+            this.dataBangLuong.Name = "dataBangLuong";
+            this.dataBangLuong.Size = new System.Drawing.Size(881, 560);
+            this.dataBangLuong.TabIndex = 37;
+            // 
+            // combo3FilterTangCa
+            // 
+            this.combo3FilterTangCa.DropDownWidth = 120;
+            this.combo3FilterTangCa.FormattingEnabled = true;
+            this.combo3FilterTangCa.Location = new System.Drawing.Point(366, 19);
+            this.combo3FilterTangCa.Name = "combo3FilterTangCa";
+            this.combo3FilterTangCa.Size = new System.Drawing.Size(86, 21);
+            this.combo3FilterTangCa.TabIndex = 12;
+            // 
+            // combo3FilterThoiGianLamDonVi
+            // 
+            this.combo3FilterThoiGianLamDonVi.DropDownWidth = 120;
+            this.combo3FilterThoiGianLamDonVi.FormattingEnabled = true;
+            this.combo3FilterThoiGianLamDonVi.Location = new System.Drawing.Point(276, 19);
+            this.combo3FilterThoiGianLamDonVi.Name = "combo3FilterThoiGianLamDonVi";
+            this.combo3FilterThoiGianLamDonVi.Size = new System.Drawing.Size(86, 21);
+            this.combo3FilterThoiGianLamDonVi.TabIndex = 11;
             // 
             // MainForm
             // 
@@ -667,6 +773,10 @@
             this.group2Filter.ResumeLayout(false);
             this.group2Filter.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataChamCong)).EndInit();
+            this.tabTinhLuong.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataBangLuong)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -731,6 +841,16 @@
         private System.Windows.Forms.ComboBox combo2CheckTangCa;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.ComboBox combo2FilterIsChecked;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.TextBox text3FilterMaNV;
+        private System.Windows.Forms.TextBox text3FilterTienTheoDonVi;
+        private System.Windows.Forms.ComboBox combo3FilterLoaiLaoDong;
+        private System.Windows.Forms.TextBox text3FilterTienLuong;
+        private System.Windows.Forms.Button button3FilterClear;
+        private System.Windows.Forms.Button button3FilterFind;
+        private System.Windows.Forms.DataGridView dataBangLuong;
+        private System.Windows.Forms.ComboBox combo3FilterTangCa;
+        private System.Windows.Forms.ComboBox combo3FilterThoiGianLamDonVi;
     }
 }
 
