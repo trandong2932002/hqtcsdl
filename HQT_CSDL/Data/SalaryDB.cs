@@ -13,8 +13,8 @@ namespace HQT_CSDL.Data
             string query = "getDataTinhLuong";
             List<SqlParameter> parameters = new List<SqlParameter>();
 
-            parameters.Add(new SqlParameter("@NgayTinhLuong", DateTime.Now.ToString("yyyy'-'MM'-'dd")));
-            //parameters.Add(new SqlParameter("@NgayTinhLuong", "2022-06-01"));
+            parameters.Add(new SqlParameter("@NgayChamCong", DateTime.Now.ToString("yyyy'-'MM'-'dd")));
+            //parameters.Add(new SqlParameter("@NgayChamCong", "2022-06-01"));
             DataTable dataTable = ConnectionDB.ExecStoredProduceTable(query, parameters);
 
             foreach (DataRow row in dataTable.Rows)

@@ -287,14 +287,34 @@ namespace HQT_CSDL.Controller
         }
         private static void InitComboBoxes()
         {
-            int maxWorkTime = ListSalary.Max(x => x.ThoiGianLamDonVi);
-            int maxOverTime = ListSalary.Max(x => x.TangCa);
+            List<string> employmentTypes;
 
-            List<string> employmentTypes = EmployeeManagement.EmploymentTypes;
+            List<string> workTime;
 
-            List<string> workTime = Enumerable.Range(0, maxWorkTime).ToList().ConvertAll<string>(x => x.ToString());
+            List<string> overTime;
 
-            List<string> overTime = Enumerable.Range(0, maxOverTime).ToList().ConvertAll<string>(x => x.ToString());
+            if (!ListSalary.Any())
+            {
+                employmentTypes = EmployeeManagement.EmploymentTypes;
+
+                workTime = Enumerable.Range(0, 0).ToList().ConvertAll<string>(x => x.ToString());
+
+                overTime = Enumerable.Range(0, 0).ToList().ConvertAll<string>(x => x.ToString());
+
+            }
+            else
+            {
+                
+                int maxWorkTime = ListSalary.Max(x => x.ThoiGianLamDonVi);
+                int maxOverTime = ListSalary.Max(x => x.TangCa);
+
+                employmentTypes = EmployeeManagement.EmploymentTypes;
+
+                workTime = Enumerable.Range(0, maxWorkTime).ToList().ConvertAll<string>(x => x.ToString());
+
+                overTime = Enumerable.Range(0, maxOverTime).ToList().ConvertAll<string>(x => x.ToString());
+
+            }
 
 
             foreach (ComboBox comboBox in comboBoxes)

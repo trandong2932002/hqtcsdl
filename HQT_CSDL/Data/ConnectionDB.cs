@@ -8,11 +8,11 @@ namespace HQT_CSDL.Data
     public class ConnectionDB
     {
 
-        private static SqlConnection conn = new SqlConnection("Data Source=DESKTOP-RF7863D;Initial Catalog=QUANLYLUONGNV;Integrated Security=True");
+        //private static SqlConnection conn = new SqlConnection("Data Source=DESKTOP-RF7863D;Initial Catalog=QUANLYLUONGNV;Integrated Security=True");
         //public static string ConnString;
         //private static SqlConnection conn = new SqlConnection(ConnString);
         //private static SqlConnection conn = new SqlConnection("Data Source=.;Initial Catalog=QUANLYLUONGNV;Integrated Security=True");
-        //private static SqlConnection conn = new SqlConnection("Data Source=.;Initial Catalog=QUANLYLUONGNV;User ID=" + login.name + ";Password=" + login.password + ";");
+        private static SqlConnection conn = new SqlConnection("Data Source=.;Initial Catalog=QUANLYLUONGNV;User ID=" + login.name + ";Password=" + login.password + ";");
 
 
 
